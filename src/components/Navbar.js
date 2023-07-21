@@ -1,4 +1,5 @@
 import logo from "../assets/img/logo.png"
+import { Link } from "react-router-dom";
 
 function Navbar(){
     return(
@@ -7,12 +8,13 @@ function Navbar(){
                 <img src={logo} />
             </div>
             <div className="navbar-items">
-                <li>HOME</li>
-                <li>ABOUT</li>
-                <li>CONTACT</li>
+                <Link to='/'><li>HOME</li></Link>
+                <Link to='/aboutus'><li>ABOUT</li></Link>
+                <Link to='/contact'><li>CONTACT</li></Link>
             </div>
             <div className="login-button">
-                <p>LOGIN</p>
+                {/* <p>LOGIN</p> */}
+                <Link to='/login'><button>Login</button></Link>
             </div>
         </div>
     )

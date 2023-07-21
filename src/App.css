@@ -27,28 +27,48 @@
   align-items: center;
   cursor: pointer;
   list-style: none;
+  /* text-decoration: none; */
   /* background-color: red; */
   /* justify-content: space-evenly; */
 }
 .navbar-items li:hover{
   /* color: red; */
+  /* text-decoration: none; */
   color: rgb(143, 100, 44);
 }
 .navbar .navbar-items li{
-  margin: 10%;
+  margin: 15px;
+  /* text-decoration: none; */
+  color: white;
 }
-.login-button{
+/* .login-button{
   display: flex;
   align-items: center;
   margin-right: 5%;
   margin-top: 1.8%;
   height: 7%;
-  /* width: 5%; */
+  width: 5%;
   padding: 1%;
   cursor: pointer;
   background-color: green;
+} */
+/* .login-button:hover{
+  color: red;
+  background-color: rgb(115, 194, 115);
+} */
+.login-button button{
+  height: 30%;
+  width: 100px;
+  background-color: green;
+  border: none;
+  font-family: 'Teko', sans-serif;
+  font-size: 100%;
+  margin-top: 25%;
+  margin-right: 80px;
+  color: white;
+  cursor: pointer;
 }
-.login-button:hover{
+.login-button button:hover{
   color: red;
   background-color: rgb(115, 194, 115);
 }
@@ -61,17 +81,17 @@
 }
 #line {
   width: 1px;
-  height: 60%;
+  height: 70%;
   background-color: silver;
   position: absolute;
   left: 35%;
-  top: 30%;
+  top: 20%;
 }
 .about{
   width: 800px;
   height: 430px;
   position: absolute;
-  top: 35%;
+  top: 25%;
   left: 40%;
   /* background-color: red; */
 }
@@ -96,4 +116,34 @@
   text-align: center;
   padding-top: 3px;
   /* color: white; */
+}
+.aboutus{
+  height: 80.7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aboutus p{
+  color: white;
+  font-size: 80px;
+}
+.contact{
+  height: 80.7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contact p{
+  color: white;
+  font-size: 80px;
+}
+.login{
+  height: 80.7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login p{
+  color: white;
+  font-size: 80px;
 }

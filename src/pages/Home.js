@@ -5,7 +5,7 @@ import About from "../components/About";
 function Home() {
     return(
         <div className="home">
-            <Navbar />
+            {/* <Navbar /> */}
             <Basmallah />
             <About />
         </div>
