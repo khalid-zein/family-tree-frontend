@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import Home from './pages/Home';
+import Footer from './components/Footer';
 import './App.css';
 
 
@@ -23,6 +24,7 @@ function App() {
     // </div>
     <div className="App">
       <Home />
+      <Footer />
     </div>
   );
 }
