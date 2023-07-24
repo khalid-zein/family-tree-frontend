@@ -1,23 +1,42 @@
 import logo from "../assets/img/logo.png"
+import { useRef } from "react";
+import { FaBars, FaTimes} from "react-icons/fa"
 import { Link } from "react-router-dom";
 
 function Navbar(){
+    const navRef = useRef();
+
+    const showNavbar = () => {
+        navRef.current.classList.toggle(
+                 "responsive_nav"
+            );
+    };
+
+    const hideNavbar =()=>{
+        navRef.current.classList.remove(
+                  "responsive_nav"
+            );
+    };
+
     return(
-        <div className="navbar">
-            <div className="logo">
-                <img src={logo} />
-            </div>
-            <div className="navbar-items">
-                <Link to='/'><li>HOME</li></Link>
-                <Link to='/aboutus'><li>ABOUT</li></Link>
-                <Link to='/contact'><li>CONTACT</li></Link>
-            </div>
-            <div className="login-button">
-                {/* <p>LOGIN</p> */}
-                <Link to='/login'><button>Login</button></Link>
-            </div>
-        </div>
-    )
+        <header>
+            <img src={logo}></img>
+            <nav ref={navRef}>
+                <Link to='/'><a onClick={hideNavbar}>HOME</a></Link>
+                <Link to='/aboutus'><a onClick={hideNavbar}>ABOUT</a></Link>
+                <Link to='/contact'><a onClick={hideNavbar}>CONTACT</a></Link>
+                <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+                    <FaTimes />
+                </button>
+            </nav>
+            <Link to='/login'><button className="login-btn" onClick={hideNavbar}>Login</button></Link>
+            <button 
+                    className="nav-btn" 
+                    onClick={showNavbar}>
+                    <FaBars />
+            </button>
+        </header>
+    );
 }
 
 export default Navbar;
