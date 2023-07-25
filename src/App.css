@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:wght@600&family=Teko&family=Titillium+Web:wght@600;700&family=Varela+Round&display=swap');
-*{
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:wght@600&family=Teko&family=Titillium+Web:wght@600;700&family=Varela+Round&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-.home{
+.home {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -13,68 +13,79 @@
 
 /* Navbar */
 
-header{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 80px;
-	padding: 0 2rem;
-	background-color: rgb(31, 30, 30);
-	color: white;
-	font-family: 'Titillium Web', sans-serif;
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0 2rem;
+  background-color: rgb(31, 30, 30);
+  color: white;
+  font-family: "Titillium Web", sans-serif;
 }
-header img{
-	height: 90%;
+header img {
+  height: 90%;
 }
-nav a{
-	margin: 0 1rem;
-	color: white;
-	text-decoration: none;
+nav a {
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
 }
-nav a:hover{
-	color: rgb(143, 100, 44);
+nav a:hover {
+  color: rgb(143, 100, 44);
 }
-header .login-btn{
-	height: 40%;
-	width: 70px;
-	background-color: green;
-	border: none;
-	font-size: 20px;
-	color: white;
-	cursor: pointer;
+header .login-btn-box {
+  background-color: rgb(143, 100, 44);
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid;
+  border-radius: 25px;
 }
-header .login-btn:hover{
-	color: red;
-	background-color: rgb(115, 194, 115);
+header .login-btn-box i {
+  font-weight: 700;
 }
-header .nav-btn{
-	padding: 5px;
-	cursor: pointer;
-	background: transparent;
-	border: none;
-	outline: none;
-	color: white;
-	/* visibility: hidden; */
-	display: none;
-	opacity: 0;
-	font-size: 1.8rem;
+header .login-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  font-weight: 700;
 }
-header .nav-close-btn{
-	color: red;
+header .login-btn-box:hover {
+  background-color: rgb(115, 194, 115);
+  color: black;
+  border: 2px solid white;
+}
+header .nav-btn {
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  /* visibility: hidden; */
+  display: none;
+  opacity: 0;
+  font-size: 1.8rem;
+}
+header .nav-close-btn {
+  color: red;
 }
 
-
-.basmallah{
+.basmallah {
   height: 75vh;
 }
-.basmallah img{
+.basmallah img {
   height: 100%;
 }
-.about{
+.about {
   width: 800px;
   height: 400px;
   padding: 2%;
-  font-family: 'Varela Round', sans-serif;
+  font-family: "Varela Round", sans-serif;
   color: white;
   letter-spacing: 1px;
   text-align: start;
@@ -82,19 +93,19 @@ header .nav-close-btn{
   background-color: rgba(15, 14, 9, 0.6);
   box-shadow: 0px 5px 10px 0px rgba(18, 64, 13, 0.5);
 }
-.about::after{
-	content: '';
-	width: 2px;
-	height: 57%;
-	background: silver;
-	position: absolute;
-	left: 40%;
-	top: 25%;
+.about::after {
+  content: "";
+  width: 2px;
+  height: 57%;
+  background: silver;
+  position: absolute;
+  left: 40%;
+  top: 25%;
 }
-.about p{
-	margin-top: 3%;
+.about p {
+  margin-top: 3%;
 }
-.footer{
+.footer {
   width: 100%;
   height: 27px;
   background-color: rgb(143, 100, 44);
@@ -102,302 +113,271 @@ header .nav-close-btn{
   align-items: center;
   justify-content: center;
 }
-.footer p{
-  font-family: 'Lilita One', cursive;
+.footer p {
+  font-family: "Lilita One", cursive;
 }
-.aboutus{
+.aboutus {
   height: 80.7vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.aboutus p{
+.aboutus p {
   color: white;
   font-size: 80px;
 }
-.login{
+.login {
   height: 80.7vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.login p{
+.login p {
   color: white;
   font-size: 80px;
 }
 
 /* Contact Section */
-.contact 
-{
-	/* position: relative; */
-	padding: 5.3% 5%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+.contact {
+  /* position: relative; */
+  padding: 5.3% 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.contact .content 
-{
-	max-width: 800px;
-	text-align: center;
+.contact .content {
+  max-width: 800px;
+  text-align: center;
 }
-.contact .content h2 
-{
-	font-size: 3em;
-	color: #fff;
-	font-weight: 500;
+.contact .content h2 {
+  font-size: 3em;
+  color: #fff;
+  font-weight: 500;
 }
-.contact .content p 
-{
-	color: #fff;
-	font-size: 1.1em;
-	font-weight: 300;
+.contact .content p {
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 300;
 }
-.container 
-{
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 50px;
-	margin-top: 30px;
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  margin-top: 30px;
 }
-.container .contactInfo 
-{
-	width: 50%;
-	display: flex;
-	flex-direction: column;
+.container .contactInfo {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
-.container .contactInfo .box 
-{
-	/* position: relative; */
-	padding: 20px 0;
-	display: flex;
-	cursor: pointer;
+.container .contactInfo .box {
+  /* position: relative; */
+  padding: 20px 0;
+  display: flex;
+  cursor: pointer;
 }
-.container .contactInfo .box .icon 
-{
-	min-width: 60px;
-	height: 60px;
-	background: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 1.75em;
-	transition: 0.5s;
+.container .contactInfo .box .icon {
+  min-width: 60px;
+  height: 60px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75em;
+  transition: 0.5s;
 }
-.container .contactInfo .box:hover .icon 
-{
-	background: rgb(143, 100, 44);
-	color: #fff;
+.container .contactInfo .box:hover .icon {
+  background: rgb(143, 100, 44);
+  color: #fff;
 }
-.container .contactInfo .box .text 
-{
-	display: flex;
-	flex-direction: column;
-	margin-left: 20px;
-	font-size: 1.1em;
-	color: #fff;
-	font-weight: 300;
+.container .contactInfo .box .text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  font-size: 1.1em;
+  color: #fff;
+  font-weight: 300;
 }
-.container .contactInfo .box .text h3 
-{
-	font-weight: 500;
-	color: rgb(143, 100, 44);
+.container .contactInfo .box .text h3 {
+  font-weight: 500;
+  color: rgb(143, 100, 44);
 }
-.container .contactInfo .txt
-{
-	color: #fff;
-	margin-top: 50px;
-	font-weight: 500;
-	padding-left: 10px;
-	line-height: 1em;
+.container .contactInfo .txt {
+  color: #fff;
+  margin-top: 50px;
+  font-weight: 500;
+  padding-left: 10px;
+  line-height: 1em;
 }
-.sci 
-{
-	/* position: relative; */
-	display: flex;
-	gap: 30px;
-	margin: 20px 0;
+.sci {
+  /* position: relative; */
+  display: flex;
+  gap: 30px;
+  margin: 20px 0;
 }
-.sci li 
-{
-	list-style: none;
+.sci li {
+  list-style: none;
 }
-.sci li a 
-{
-	color: #fff;
-	font-size: 2em;
-	transition: 0.5s;
+.sci li a {
+  color: #fff;
+  font-size: 2em;
+  transition: 0.5s;
 }
-.sci li a:hover 
-{
-	color: rgb(143, 100, 44);
+.sci li a:hover {
+  color: rgb(143, 100, 44);
 }
 
-
-.container .contactForm
-{
-	/* position: relative; */
-	width: 40%;
-	background: #fff;
-	min-height: 100px;
-	padding: 60px;
-} 
-.container .contactForm h2 
-{
-	font-size: 2em;
-	color: #333;
-	font-weight: 500;
+.container .contactForm {
+  /* position: relative; */
+  width: 40%;
+  background: #fff;
+  min-height: 100px;
+  padding: 60px;
 }
-.container .contactForm .inputBox 
-{
-	/* position: relative; */
-	width: 100%;
-	margin-top: 20px;
+.container .contactForm h2 {
+  font-size: 2em;
+  color: #333;
+  font-weight: 500;
 }
-.container .contactForm .inputBox input, 
-.container .contactForm .inputBox textarea 
-{
-	width: 100%;
-	padding: 5px 0;
-	font-size: 1.1em;
-	margin: 10px 0;
-	border: none;
-	border-bottom: 2px solid #333;
-	outline: none;
-	resize: none;
+.container .contactForm .inputBox {
+  /* position: relative; */
+  width: 100%;
+  margin-top: 20px;
 }
-.container .contactForm .inputBox span 
-{
-	/* position: absolute; */
-	left: 0;
-	pointer-events: none;
-	padding: 5px 0;
-	margin: 10px 0;
-	font-size: 1.1em;
-	color: #666;
-	transition: 0.1s;
+.container .contactForm .inputBox input,
+.container .contactForm .inputBox textarea {
+  width: 100%;
+  padding: 5px 0;
+  font-size: 1.1em;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+  resize: none;
 }
-.container .contactForm .inputBox input:focus ~ span, 
+.container .contactForm .inputBox span {
+  /* position: absolute; */
+  left: 0;
+  pointer-events: none;
+  padding: 5px 0;
+  margin: 10px 0;
+  font-size: 1.1em;
+  color: #666;
+  transition: 0.1s;
+}
+.container .contactForm .inputBox input:focus ~ span,
 .container .contactForm .inputBox textarea:focus ~ span,
-.container .contactForm .inputBox input:valid ~ span, 
-.container .contactForm .inputBox textarea:valid ~ span 
-{
-	color: green;
-	font-size: 0.9em;
-	transform: translateY(-20px);
+.container .contactForm .inputBox input:valid ~ span,
+.container .contactForm .inputBox textarea:valid ~ span {
+  color: green;
+  font-size: 0.9em;
+  transform: translateY(-20px);
 }
-.container .contactForm .inputBox input[type="submit"]
-{
-	width: 100px;
-	background: rgb(143, 100, 44);
-	color: #fff;
-	border: none;
-	cursor: pointer;
-	padding: 10px;
-	font-size: 1.1em;
-	font-weight: 500;
+.container .contactForm .inputBox input[type="submit"] {
+  width: 100px;
+  background: rgb(143, 100, 44);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: 500;
 }
 
 /* lets make it responsive */
 
 @media only screen and (max-width: 1024px) {
-	header .nav-btn{
-		/* visibility: visible; */
-		display: inline;
-		opacity: 1;
-	}
+  header .nav-btn {
+    /* visibility: visible; */
+    display: inline;
+    opacity: 1;
+  }
 
-	header nav{
-		position: fixed;
-		top: -100vh;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		background-color: rgb(143, 100, 44);
-		transition: 1s;
-	}
+  header nav {
+    position: fixed;
+    top: -100vh;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background-color: rgb(143, 100, 44);
+    transition: 1s;
+  }
 
-	header .responsive_nav{
-		transform: translateY(100vh);
-	}
+  header .responsive_nav {
+    transform: translateY(100vh);
+  }
 
-	header .login-btn{
+  /* header .login-btn{
 		margin-left: 80%;
-	}
+	} */
 
-	nav .nav-close-btn{
-		position: absolute;
-		top: 2rem;
-		right: 2rem;
-	}
+  nav .nav-close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
 
-	nav a{
-		font-size: 1.5rem;
-	}
-	.home{
-		display: block;
-	}
-	.about::after{
-		display: none;
-	}
-	.basmallah{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.about-parent{
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	nav a:hover{
-		color: green;
-	}
+  nav a {
+    font-size: 1.5rem;
+  }
+  .home {
+    display: block;
+  }
+  .about::after {
+    display: none;
+  }
+  .basmallah {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-parent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  nav a:hover {
+    color: green;
+  }
 }
 
-
-@media (max-width: 991px)
-{
-	.contact
-	{
-		padding: 50px;
-	}
-	.container
-	{
-		flex-direction: column;
-	}
-	.container .contactInfo,
-	.container .contactForm
-	{
-		width: 100%;
-	}
-	.container .contactForm
-	{
-		padding: 50px 30px;
-	}
+@media (max-width: 991px) {
+  .contact {
+    padding: 50px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .container .contactInfo,
+  .container .contactForm {
+    width: 100%;
+  }
+  .container .contactForm {
+    padding: 50px 30px;
+  }
 }
 
-@media (max-width: 600px) 
-{
-	.about{
-		font-size: 21px;
-		padding-top: 5%;
-		text-align: center;
-	}
-	.about p{
-		margin-top: 7%;
-	}
-	.footer p{
-		font-size: 10px;
-	}
-	header .login-btn{
-		width: auto;
-	}
+@media (max-width: 600px) {
+  .about {
+    font-size: 21px;
+    padding-top: 5%;
+    text-align: center;
+  }
+  .about p {
+    margin-top: 7%;
+  }
+  .footer p {
+    font-size: 10px;
+  }
+  header .login-btn {
+    width: auto;
+  }
 }
