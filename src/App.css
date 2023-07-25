@@ -59,6 +59,9 @@ header .nav-btn{
 	opacity: 0;
 	font-size: 1.8rem;
 }
+header .nav-close-btn{
+	color: red;
+}
 
 
 .basmallah{
@@ -126,8 +129,8 @@ header .nav-btn{
 /* Contact Section */
 .contact 
 {
-	position: relative;
-	padding: 50px 100px;
+	/* position: relative; */
+	padding: 5.3% 5%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -167,7 +170,7 @@ header .nav-btn{
 }
 .container .contactInfo .box 
 {
-	position: relative;
+	/* position: relative; */
 	padding: 20px 0;
 	display: flex;
 	cursor: pointer;
@@ -212,7 +215,7 @@ header .nav-btn{
 }
 .sci 
 {
-	position: relative;
+	/* position: relative; */
 	display: flex;
 	gap: 30px;
 	margin: 20px 0;
@@ -235,7 +238,7 @@ header .nav-btn{
 
 .container .contactForm
 {
-	position: relative;
+	/* position: relative; */
 	width: 40%;
 	background: #fff;
 	min-height: 100px;
@@ -249,7 +252,7 @@ header .nav-btn{
 }
 .container .contactForm .inputBox 
 {
-	position: relative;
+	/* position: relative; */
 	width: 100%;
 	margin-top: 20px;
 }
@@ -267,14 +270,14 @@ header .nav-btn{
 }
 .container .contactForm .inputBox span 
 {
-	position: absolute;
+	/* position: absolute; */
 	left: 0;
 	pointer-events: none;
 	padding: 5px 0;
 	margin: 10px 0;
 	font-size: 1.1em;
 	color: #666;
-	transition: 0.5s;
+	transition: 0.1s;
 }
 .container .contactForm .inputBox input:focus ~ span, 
 .container .contactForm .inputBox textarea:focus ~ span,
@@ -317,7 +320,7 @@ header .nav-btn{
 		align-items: center;
 		justify-content: center;
 		gap: 1.5rem;
-		background-color: red;
+		background-color: rgb(143, 100, 44);
 		transition: 1s;
 	}
 
@@ -353,6 +356,9 @@ header .nav-btn{
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	nav a:hover{
+		color: green;
 	}
 }
 

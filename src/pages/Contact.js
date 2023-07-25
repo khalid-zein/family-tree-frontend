@@ -11,21 +11,21 @@ function Contact(){
 		<div class="container">
 			<div class="contactInfo">
 				<div class="box">
-					<div class="icon"><ion-icon name="location-outline"></ion-icon></div>
+					<div class="icon"><i class="fa-solid fa-location-dot"></i></div>
 					<div class="text">
 						<h3>Address</h3>
 						<p> Dar Al-Muddathir - Malindi, Kenya</p>
 					</div>
 				</div>
 				<div class="box">
-					<div class="icon"><ion-icon name="call-outline"></ion-icon></div>
+					<div class="icon"><i class="fa-solid fa-phone"></i></div>
 					<div class="text">
 						<h3>Phone</h3>
 						<p>+254724396365</p>
 					</div>
 				</div>
 				<div class="box">
-					<div class="icon"><ion-icon name="mail-outline"></ion-icon></div>
+					<div class="icon"><i class="fa-solid fa-envelope"></i></div>
 					<div class="text">
 						<h3>Email</h3>
 						<p>mhdsaggafsiyu@gmail.com</p>
@@ -33,10 +33,10 @@ function Contact(){
 				</div>
 				<h2 class="txt">Connect with us</h2>
 				<ul class="sci">
-					<li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
-					<li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
-					<li><a href="#"><ion-icon name="logo-whatsapp"></ion-icon></a></li>
-					<li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a></li>
+					<li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+					<li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+					<li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
+					<li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
 				</ul>
 			</div>
 
