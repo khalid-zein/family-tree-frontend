@@ -16,7 +16,7 @@ function Aboutus() {
       </select>
 
       <div className="aboutus">
-        <p>{t("عن.1")}</p>
+        <p>{t("About.1")}</p>
       </div>
     </div>
   );
