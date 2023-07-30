@@ -11,8 +11,8 @@ function Aboutus() {
     <div>
       <select onChange={(e) => handleClick(e.target.value)}>
         <option>Choose language</option>
-        <option value="en">English</option>
         <option value="ar">عربي</option>
+        <option value="en">English</option>
       </select>
 
       <div className="aboutus">
