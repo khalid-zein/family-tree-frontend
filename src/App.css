@@ -75,6 +75,8 @@ header .nav-close-btn {
   color: red;
 }
 
+
+
 .basmallah {
   height: 75vh;
 }
@@ -115,6 +117,20 @@ header .nav-close-btn {
 }
 .footer p {
   font-family: "Lilita One", cursive;
+}
+
+
+/* History */
+
+.history select{
+  border: none;
+  outline: none;
+  width: 180px;
+  font-family: "Titillium Web", sans-serif;
+  padding-left: 30px;
+  background-color: rgb(143, 100, 44);
+  color: white;
+  margin: 1%;
 }
 .aboutus {
   height: 80.7vh;

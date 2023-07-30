@@ -8,7 +8,7 @@ function Aboutus() {
   }
 
   return (
-    <div>
+    <div className="history">
       <select onChange={(e) => handleClick(e.target.value)}>
         <option>Choose language</option>
         <option value="ar">عربي</option>
