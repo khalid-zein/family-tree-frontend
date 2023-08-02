@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:wght@600&family=Teko&family=Titillium+Web:wght@600;700&family=Varela+Round&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Noto+Naskh+Arabic&family=Poppins:wght@600&family=Teko&family=Titillium+Web:wght@600;700&family=Varela+Round&display=swap');
 * {
   padding: 0;
   margin: 0;
@@ -132,15 +132,36 @@ header .nav-close-btn {
   color: white;
   margin: 1%;
 }
-.aboutus {
-  height: 80.7vh;
+.upper-bg{
+  height: 30vh;
+  width: 100%;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Habib-ali-bungur.jpg/640px-Habib-ali-bungur.jpg);
+  background-size: cover;
+}
+.lower-bg{
+  /* height: 200vh; */
+  width: 100%;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.aboutus p {
-  color: white;
-  font-size: 80px;
+.content-bg{
+  height: 90%;
+  width: 40%;
+  font-family: 'Noto Naskh Arabic', serif;
+  text-align: end;
+}
+.content-bg .p-one{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+}
+.content-bg div{
+  margin-bottom: 10px;
+}
+.content-bg p{
+  font-size: 25px;
 }
 
 /* Login Page */
@@ -480,6 +501,9 @@ header .nav-close-btn {
   .container .contactForm {
     padding: 50px 30px;
   }
+  .content-bg{
+    width: 90%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -502,5 +526,8 @@ header .nav-close-btn {
   }
   .login-one .p-one{
     font-size: 30px;
+  }
+  .content-bg p{
+    font-size: 20px;
   }
 }
