@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Login() {
   const [formData, setFormData] = useState({email: "", password: ""})
@@ -10,14 +11,19 @@ function Login() {
   }
 
   const handleLogin = async (e) => {
-    e.preventDefault()
-
+    // e.preventDefault()
+    
     try {
-      fetch()
+      const res = await axios.post(process.env.REACT_APP_CREATE_MEMBER , {
+        formData
+      })
+      console.log(res)
     } catch (err) {
-      console.log(err)
+      console.log()
     }
-
+    
+    
+    console.log(formData)
     setFormData({email: '', password: ''})
   }
 
