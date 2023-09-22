@@ -4,7 +4,7 @@ function Basmallah() {
   return (
     <div>
       <div className="basmallah">
-        <img src={basmallah}></img>
+        <img src={basmallah} alt='Basmallah'/>
       </div>
     </div>
   );
