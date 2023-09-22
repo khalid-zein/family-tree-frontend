@@ -1,4 +1,30 @@
+import { useEffect, useState } from "react";
+
 function Login() {
+  const [formData, setFormData] = useState({email: "", password: ""})
+
+  const handleInputChange = (e) => {
+    setFormData((prevFormItem) => ({
+      ...prevFormItem, [e.target.value]: e.target.value
+    }))
+  }
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+
+    try {
+      fetch()
+    } catch (err) {
+      console.log(err)
+    }
+
+    setFormData({email: '', password: ''})
+  }
+
+  useEffect(() => {
+    handleLogin()
+  })
+
   return (
     <div className="login">
       <div className="login-container">
@@ -13,10 +39,22 @@ function Login() {
         <div className="login-two">
           <div className="login-child">
             <p>Sign in</p>
-            <form>
+            <form onSubmit={handleLogin}>
               <div>
-                 <input className="entry" type="email" placeholder="Email"></input>
-                 <input className="entry" type="password" placeholder="password"></input>
+                 <input
+                  value={formData.email} 
+                  onChange={handleInputChange}
+                  className="entry" 
+                  type="email" 
+                  placeholder="Email"
+                />
+                 <input
+                  value={formData.password} 
+                  onChange={handleInputChange}
+                  className="entry" 
+                  type="password" 
+                  placeholder="password"
+                />
               </div>
               <button>Submit</button><br></br>
               <a href="#">forgot password ?</a>

@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <header>
-      <img src={logo}></img>
+      <img src={logo} alt='Logo' />
       <nav ref={navRef}>
         <Link to="/">
           <a onClick={hideNavbar}>HOME</a>
