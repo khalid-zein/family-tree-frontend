@@ -2,29 +2,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Login() {
-  const [formData, setFormData] = useState({email: "", password: ""})
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const handleInputChange = (e) => {
-    setFormData((prevFormItem) => ({
-      ...prevFormItem, [e.target.value]: e.target.value
-    }))
-  }
-
-  const handleLogin = async (e) => {
-    // e.preventDefault()
-    
-    try {
-      const res = await axios.post(process.env.REACT_APP_CREATE_MEMBER , {
-        formData
-      })
+  const handleLogin = async () => {
+    axios.post(process.env.REACT_APP_LOGIN_USER , {
+      email, password
+    })
+    .then((res) => {
       console.log(res)
-    } catch (err) {
-      console.log()
-    }
-    
-    
-    console.log(formData)
-    setFormData({email: '', password: ''})
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   useEffect(() => {
@@ -48,15 +38,15 @@ function Login() {
             <form onSubmit={handleLogin}>
               <div>
                  <input
-                  value={formData.email} 
-                  onChange={handleInputChange}
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
                   className="entry" 
                   type="email" 
                   placeholder="Email"
                 />
                  <input
-                  value={formData.password} 
-                  onChange={handleInputChange}
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
                   className="entry" 
                   type="password" 
                   placeholder="password"

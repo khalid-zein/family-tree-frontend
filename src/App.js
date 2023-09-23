@@ -6,9 +6,11 @@ import Navbar from './components/Navbar';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import './App.css';
+import CreateMembers from './components/CreateMembers';
 
 
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
           <Route path='/aboutus' element={ <Aboutus />} />
           <Route path='/contact' element={ <Contact />}/>
           <Route path='/login' element={ <Login />}/>
+          <Route path='/create-members' element={ <CreateMembers /> } />
          </Routes>
          <Footer />
       </BrowserRouter>
