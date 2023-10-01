@@ -1,25 +1,38 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../config/supabaseConfig";
 
 function Login() {
+const navigate = useNavigate()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleLogin = async () => {
-    axios.post(process.env.REACT_APP_LOGIN_USER , {
-      email, password
-    })
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      })      
+      
+      if (data) {
+        console.log(data)
+        setEmail('') 
+        setPassword('')
+        navigate('/admin')
+      } 
+      
+      if (error) {
+        console.log(error)
+      }
 
-  useEffect(() => {
-    handleLogin()
-  })
+    } catch (err) {
+      console.log(err)
+    }
+   
+  }
 
   return (
     <div className="login">
