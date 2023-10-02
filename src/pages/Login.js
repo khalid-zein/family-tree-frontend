@@ -1,29 +1,38 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../config/supabaseConfig";
 
 function Login() {
-  const [formData, setFormData] = useState({email: "", password: ""})
+const navigate = useNavigate()
 
-  const handleInputChange = (e) => {
-    setFormData((prevFormItem) => ({
-      ...prevFormItem, [e.target.value]: e.target.value
-    }))
-  }
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleLogin = async (e) => {
     e.preventDefault()
-
+    
     try {
-      fetch()
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      })      
+      
+      if (data) {
+        console.log(data)
+        setEmail('') 
+        setPassword('')
+        navigate('/admin')
+      } 
+      
+      if (error) {
+        console.log(error)
+      }
+
     } catch (err) {
       console.log(err)
     }
-
-    setFormData({email: '', password: ''})
+   
   }
-
-  useEffect(() => {
-    handleLogin()
-  })
 
   return (
     <div className="login">
@@ -42,15 +51,15 @@ function Login() {
             <form onSubmit={handleLogin}>
               <div>
                  <input
-                  value={formData.email} 
-                  onChange={handleInputChange}
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
                   className="entry" 
                   type="email" 
                   placeholder="Email"
                 />
                  <input
-                  value={formData.password} 
-                  onChange={handleInputChange}
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)}
                   className="entry" 
                   type="password" 
                   placeholder="password"
