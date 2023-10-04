@@ -21,7 +21,6 @@ const CreateMembers = () => {
             }
 
             if (data) {
-                console.log(data)
                 setFathersName('')
                 setChildren('')
                 navigate('/admin')
