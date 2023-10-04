@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../config/supabaseConfig";
+import { toast, ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
 const navigate = useNavigate()
@@ -12,20 +14,24 @@ const navigate = useNavigate()
     e.preventDefault()
     
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
-      })      
-      
-      if (data) {
-        console.log(data)
-        setEmail('') 
-        setPassword('')
-        navigate('/admin')
-      } 
-      
-      if (error) {
-        console.log(error)
+      if (email && password) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
+        })      
+        
+        if (data) {
+          setEmail('') 
+          setPassword('')
+          navigate('/admin')
+        } 
+        
+        if (error) {
+          console.log(error)
+        }
+        toast.success('User logged in successfully')
+      } else {
+        toast.error('Please fill in all fields')
       }
 
     } catch (err) {
@@ -35,6 +41,17 @@ const navigate = useNavigate()
   }
 
   return (
+    <>
+      <ToastContainer 
+        position = 'top-center'
+        autoClose = {3000}
+        hideProgressBar = {true}
+        closeOnClick = {true}
+        pauseOnHover = {true}
+        draggable = {true}
+        progress = {undefined}
+        theme= 'colored'
+    />
     <div className="login">
       <div className="login-container">
 
@@ -72,6 +89,7 @@ const navigate = useNavigate()
         </div>
       </div>
     </div>
+    </>
   );
 }
 
