@@ -12,6 +12,6 @@ code {
     monospace;
 } */
 body {
-  background-image: url(/src/assets/img/background.jpg);
+  /* background-image: url(/src/assets/img/background.jpg); */
   background-size: cover;
 }

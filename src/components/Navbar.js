@@ -46,25 +46,26 @@ function Navbar({session}) {
           <></>
         )}
         <Link to="/contact">
-          <a onClick={hideNavbar}>CONTACT</a>
+          <a onClick={hideNavbar}>CONTACT US</a>
         </Link>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
-      </nav>
       <div className="login-btn-box">
-        <i class="fa-regular fa-user"></i>
+        {/* <i class="fa-regular fa-user"></i> */}
         {session ? (
           <Link onClick={handleLogout} to="/">
             <button className="login-btn">Log Out</button>
           </Link>
         ) : (
           <Link to="/login">
-            <button className="login-btn">Login</button>
+            <button onClick={hideNavbar} className="login-btn">Admin's Dashboard</button>
+            {/* <p className="login-btn">Admin's Dashboard</p> */}
           </Link>
         )}
         
       </div>
+      </nav>
       <button className="nav-btn" onClick={showNavbar}>
         <FaBars />
       </button>
