@@ -52,7 +52,6 @@ function Navbar({session}) {
           <FaTimes />
         </button>
       <div className="login-btn-box">
-        {/* <i class="fa-regular fa-user"></i> */}
         {session ? (
           <Link onClick={handleLogout} to="/">
             <button className="login-btn">Log Out</button>
@@ -60,7 +59,6 @@ function Navbar({session}) {
         ) : (
           <Link to="/login">
             <button onClick={hideNavbar} className="login-btn">Admin's Dashboard</button>
-            {/* <p className="login-btn">Admin's Dashboard</p> */}
           </Link>
         )}
         

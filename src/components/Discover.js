@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Test3(){
+function Discover(){
     return(
         <div className="test3">
             <h1>Find your family.</h1>
@@ -11,4 +11,4 @@ function Test3(){
     )
 }
 
-export default Test3;
+export default Discover;
