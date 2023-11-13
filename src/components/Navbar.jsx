@@ -2,9 +2,10 @@ import logo from "../assets/img/logo.png";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "../config/supabaseConfig";
+import axios from "axios";
+import { userUrl } from "../data/ApiUrls";
 
-function Navbar({session}) {
+function Navbar({ loggedIn, setLoggedIn}) {
   const navRef = useRef();
   const navigate = useNavigate()
 
@@ -16,12 +17,18 @@ function Navbar({session}) {
     navRef.current.classList.remove("responsive_nav");
   };
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
+  const handleLogOut = () => {
+    localStorage.clear()
+    setLoggedIn(false)
 
-    console.log(error)
+    axios.delete(`${userUrl}/logout`)
+      .then((res) => {
+        if(!res.ok){
+          res.json().then(error => console.warn(error))
+        }
+      })
     navigate('/')
-}
+  }
 
   return (
     <header>
@@ -33,7 +40,7 @@ function Navbar({session}) {
         <Link to="/aboutus">
           <a onClick={hideNavbar}>ABOUT</a>
         </Link>
-        {session ? (
+        {loggedIn ? (
           <>
             <Link to="/admin            ">
               <a onClick={hideNavbar}>ADMIN</a>
@@ -54,8 +61,8 @@ function Navbar({session}) {
       </nav>
       <div className="login-btn-box">
         <i class="fa-regular fa-user"></i>
-        {session ? (
-          <Link onClick={handleLogout} to="/">
+        {loggedIn ? (
+          <Link onClick={handleLogOut} to="/">
             <button className="login-btn">Log Out</button>
           </Link>
         ) : (

@@ -7,33 +7,29 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Admin from './pages/Admin/Admin';
 import CreateMembers from './pages/Admin/CreateMembers';
-import { supabase } from './config/supabaseConfig';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
+import UseFetch from './components/UseFetch';
 
 function App() {
-  const [session, setSession] = useState(null)
+  const { data: membersList, loading, error, setData } = UseFetch('https://family-tree-web.onrender.com/trees/api/view-list')
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+  const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
+  console.log("Logged in: ", loggedIn)
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+
+  
   
   return (
     <div className="App">
       <BrowserRouter>
-         <Navbar session={session} />
+         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
          <Routes>
           <Route path='/' element={ <Home />}/>
           <Route path='/aboutus' element={ <Aboutus />} />
           <Route path='/contact' element={ <Contact />}/>
-          <Route path='/login' element={ <Login />}/>
-          <Route path='/admin' element={ <Admin />} />
+          <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}/>
+          <Route path='/admin' element={ <Admin membersList={membersList} loading={loading} error={error} setData={setData} />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
          </Routes>
          <Footer />
