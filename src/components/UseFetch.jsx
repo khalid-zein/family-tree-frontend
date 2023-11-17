@@ -1,29 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const UseFetch = (url) => {
+const UseFetch = (apiUrl) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        axios.get(url)
-        .then((res) => {
-            if (res.status === 200) {
-                const items = res.data
-                setData(items)
-                setLoading(false)
-                setError(false)
-            } else {
-               console.error('Request made was a bad request. Check again!') 
-            }
-        })
+        fetch(apiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+            setData(data.data)
+            setLoading(false)
+            setError(false)
+        }) 
         .catch((err) => {
             console.log(err)
             setError(true)
             setLoading(false)
         })
-    }, [url])
+    }, [apiUrl])
 
     return ( {data, loading, error, setData} );
 }

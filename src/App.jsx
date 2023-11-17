@@ -7,15 +7,20 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Admin from './pages/Admin/Admin';
 import CreateMembers from './pages/Admin/CreateMembers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { dataUrl } from './data/ApiUrls'
 import './App.css';
 import UseFetch from './components/UseFetch';
 
 function App() {
-  const { data: membersList, loading, error, setData } = UseFetch('https://family-tree-web.onrender.com/trees/api/view-list')
+  const { data: list, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
 
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
   console.log("Logged in: ", loggedIn)
+
+  const members = list.members
+  console.log(members)
+  // console.log(members)
 
 
   
@@ -29,7 +34,7 @@ function App() {
           <Route path='/aboutus' element={ <Aboutus />} />
           <Route path='/contact' element={ <Contact />}/>
           <Route path='/login' element={ <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}/>
-          <Route path='/admin' element={ <Admin membersList={membersList} loading={loading} error={error} setData={setData} />} />
+          <Route path='/admin' element={ <Admin members={members} loading={loading} error={error} setData={setData} />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
          </Routes>
          <Footer />

@@ -1,0 +1,49 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "first_name": "Nick",
+      "parent": null
+    },
+    {
+      "id": 2,
+      "first_name": "John",
+      "parent": 1
+    },
+    {
+      "id": 3,
+      "first_name": "Frank",
+      "parent": 1
+    },
+    {
+      "id": 4,
+      "first_name": "Allan",
+      "parent": null
+    },
+    {
+      "id": 5,
+      "first_name": "Ed",
+      "parent": 4
+    },
+    {
+      "id": 6,
+      "first_name": "Justin",
+      "parent": 5
+    },
+    {
+      "id": 7,
+      "first_name": "Gilbert",
+      "parent": 1
+    },
+    {
+      "id": 8,
+      "first_name": "Abby",
+      "parent": 1
+    },
+    {
+      "id": 9,
+      "first_name": "Allan",
+      "parent": 7
+    }
+  ]
+}

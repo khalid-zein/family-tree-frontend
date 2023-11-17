@@ -19,20 +19,27 @@ const Login = ({loggedIn, setLoggedIn}) => {
   const handleLogin = (e) => {
     e.preventDefault()
 
-    // fetch(`${userUrl}/login`, {
-    //   method: "POST",
-    //   headers: {
-    //       "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({email, password})
-    // })
     let headers = { 'Content-Type': 'application/json' }
     
     if (email && password) {
-      axios.post(`${userUrl}/login`, 
-        JSON.stringify({ email, password }),
-        headers
-      )
+      // axios.post(`${userUrl}/login`, 
+      //   JSON.stringify({ email, password }),
+      //   headers
+      // )
+      // axios({
+      //   method: 'post',
+      //   url: `${userUrl}/login`,
+      //   mode: 'cors',
+      //   headers: 'application/json'
+      //   // responseType: 'stream'
+      // })
+      fetch(`${userUrl}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email, password})
+      })
       .then((res) => {
         if (res.ok) {
           res.json()

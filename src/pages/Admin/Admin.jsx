@@ -2,32 +2,30 @@
 import { FadeLoader } from "react-spinners";
 import { BsPencilSquare } from "react-icons/bs"
 import { BiTrash } from "react-icons/bi"
-import { dataUrl } from "../../data/ApiUrls";
-import { useParams } from "react-router-dom";
+import { apiUrl, dataUrl } from "../../data/ApiUrls";
+import axios from "axios";
 
-const Admin = ({ membersList, loading, error, setData }) => {
-    const list = membersList.map((item) => item.parent)
-    const { id } = useParams()
+const Admin = ({ members, loading, error, setData }) => {
     
      
-    const handleUpdate = () => {
-        console.log(id)
-        
-        
+    const handleUpdate = async () => {
+        try {
+            const res = await axios.put(`/${dataUrl}/update-delete/${id}`)
+            console.log(res)
+        } catch (error) {
+            console.warn(error)
+        }
         alert('Member updated successfully!')
     }
 
-    const handleDelete = (deletedMember) => {
-        axios.delete(`${dataUrl}/update-delete/${deletedMember.id}`, {
-
-        })
-        .then((res) => {
-            if (res.ok) {
-                const newMembersList = membersList.filter((member) => member.id == deletedMember.id)
-                setData(newMembersList)
-            }
-        })
-        alert('Member updated successfully!')
+    const handleDelete = async (id) => {
+        try {
+            const res = await axios.delete(`${dataUrl}/view-list/${id}`)
+            console.log(res)
+            
+        } catch (error) {
+            console.warn(error)
+        }
     }
 
     return ( 
@@ -39,7 +37,7 @@ const Admin = ({ membersList, loading, error, setData }) => {
                         loading={loading}
                         size={50}
                         aria-label="Loading Content..."
-                        data-testid="loader"
+                        members-testid="loader"
                     />
                 </div>
             ) : (
@@ -56,8 +54,8 @@ const Admin = ({ membersList, loading, error, setData }) => {
                                 <th>Delete</th>
                             </tr>
                         </thead>
-                        {membersList.map((item) => (
-                            <tbody>
+                        {members.map((item, index) => (
+                            <tbody key={index}>
                                 <tr>
                                 <td>{item.parent}</td>
                                 <td>{item.first_name}</td>
