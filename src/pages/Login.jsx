@@ -18,8 +18,6 @@ const Login = ({loggedIn, setLoggedIn}) => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-
-    let headers = { 'Content-Type': 'application/json' }
     
     if (email && password) {
       // axios.post(`${userUrl}/login`, 
