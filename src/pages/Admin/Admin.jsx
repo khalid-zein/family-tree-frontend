@@ -2,27 +2,39 @@
 import { FadeLoader } from "react-spinners";
 import { BsPencilSquare } from "react-icons/bs"
 import { BiTrash } from "react-icons/bi"
-import { apiUrl, dataUrl } from "../../data/ApiUrls";
+import { dataUrl } from "../../data/ApiUrls";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { EditContext } from "../../context/AppContext";
 
 const Admin = ({ members, loading, error, setData }) => {
+    const { editFirstName, editParentId, setEditFirstName, setEditParentId } = useContext(EditContext)
     
      
-    const handleUpdate = async () => {
+    const handleEditMembers = async (id) => {
+        const updatedMember = { first_name: editFirstName, parent: editParentId}
+
         try {
-            const res = await axios.put(`/${dataUrl}/update-delete/${id}`)
+            const res = await axios.put(`/${dataUrl}/update-delete/${id}`, 
+                JSON.stringify(updatedMember)
+            )
+            setData(members.map((member) => member.id === id ? { ...res } : member))
+            setEditFirstName('')
+            setEditParentId('')
             console.log(res)
         } catch (error) {
             console.warn(error)
         }
-        alert('Member updated successfully!')
+        // alert('Member updated successfully!')
     }
 
-    const handleDelete = async (id) => {
+    const handleDeleteMember = async (id) => {
         try {
-            const res = await axios.delete(`${dataUrl}/view-list/${id}`)
-            console.log(res)
-            
+            await axios.delete(`${dataUrl}/update-delete/${id}`)
+            const newMembers = members.filter((member) => member.id !== id)
+            setData(newMembers)
+            console.log(newMembers)
         } catch (error) {
             console.warn(error)
         }
@@ -54,19 +66,21 @@ const Admin = ({ members, loading, error, setData }) => {
                                 <th>Delete</th>
                             </tr>
                         </thead>
-                        {members.map((item, index) => (
+                        {members.map((member, index) => (
                             <tbody key={index}>
                                 <tr>
-                                <td>{item.parent}</td>
-                                <td>{item.first_name}</td>
-                                <td>{item.last_name}</td>
+                                <td>{member.parent}</td>
+                                <td>{member.first_name}</td>
+                                <td>{member.last_name}</td>
                                 <td className="">
-                                    <button onClick={handleUpdate}>
-                                        <BsPencilSquare />
-                                    </button>
+                                    <Link to={`/admin/edit-member/${member.id}`}>
+                                        <button onClick={handleEditMembers}>
+                                            <BsPencilSquare />
+                                        </button>
+                                    </Link>
                                 </td>
                                 <td>
-                                    <button onClick={handleDelete}>
+                                    <button onClick={handleDeleteMember}>
                                         <BiTrash /> 
                                     </button>
                                 </td>

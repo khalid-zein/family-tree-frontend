@@ -12,7 +12,7 @@ const CreateMembers = () => {
         e.preventDefault()
         
         try {
-            const data = await axios.post(`/${dataUrl}/create-member`, 
+            const data = await axios.post(`${dataUrl}/create-member`, 
                 JSON.stringify({parent: parentId, first_name: firstName}),
                 {
                     mode: cors,
