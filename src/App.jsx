@@ -13,7 +13,6 @@ import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
 import { useContext } from 'react';
-import { EditContext } from './context/AppContext';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
@@ -21,11 +20,6 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
   console.log("Logged in: ", loggedIn)
 
-  
-
-  const { editFirstName, editParentId, setEditFirstName, setEditParentId } = useContext(EditContext)
-  
-  
   return (
     <div className="App">
       <BrowserRouter>
@@ -49,13 +43,7 @@ function App() {
             />} 
           />
           <Route path='/admin/edit-member/:id' element={ 
-            <EditMembers
-              members={members}
-              editFirstName={editFirstName} 
-              editParentId={editParentId}
-              setEditFirstName={setEditFirstName}
-              setEditParentId={setEditParentId} 
-            />} 
+            <EditMembers members={members}/>} 
           />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
          </Routes>

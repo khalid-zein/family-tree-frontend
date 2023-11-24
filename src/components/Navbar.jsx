@@ -2,7 +2,6 @@ import logo from "../assets/img/logo.png";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { userUrl } from "../data/ApiUrls";
 
 function Navbar({ loggedIn, setLoggedIn}) {
@@ -21,13 +20,16 @@ function Navbar({ loggedIn, setLoggedIn}) {
     localStorage.clear()
     setLoggedIn(false)
 
-    axios.delete(`${userUrl}/logout`)
-      .then((res) => {
-        if(!res.ok){
-          res.json().then(error => console.warn(error))
-        }
+      fetch(`${userUrl}/logout`, {
+        method: "DELETE"
       })
-    navigate('/')
+      .then((res) => res.json())
+      .then(data => {
+        console.log(data)
+        navigate('/')
+      })
+      .catch(error => console.error(error));
+    
   }
 
   return (
