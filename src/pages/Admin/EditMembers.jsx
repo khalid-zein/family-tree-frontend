@@ -1,55 +1,71 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { dataUrl } from "../../data/ApiUrls";
+import { ToastContainer, toast } from "react-toastify";
 
-const EditMembers = ({ members }) => {
+const EditMembers = () => {
     const { id } = useParams()
-    const paramsId = Number(id)
     const [formData, setFormData] = useState({
-        id: "", firstName: "", parentId: ""
+        id: id, firstName: "", parentId: ""
     })
-    const memberDetails = members.find((member) => member.id == paramsId)
-    // console.log(memberDetails)
-
-    const handleInputChange = (e) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData, [e.target.value]: e.target.value
-        }))
-    }
+    const navigate =useNavigate()
 
     useEffect(() => {
-        axios.get(`${dataUrl}/update-delete/${id}`)
+        fetch(`${dataUrl}/update-delete/${id}`)
         .then((res) => {
-            console.log(res.data.first_name)
-            setFormData({...formData, 
-                firstName: res.data.first_name, 
-                parentId: res.data.parent 
-            })
+            if(res.ok) {
+                res.json().then((data) => {
+                    setFormData({...formData, 
+                        firstName: data.first_name, 
+                        parentId: data.parent 
+                    })
+                })
+            }
         })
     }, [])
 
     const handleEditMembers = (e) => {
         e.preventDefault()
 
-        axios.put(`${dataUrl}/update-delete/${id}`,
-            JSON.stringify({
+        fetch(`${dataUrl}/update-delete/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 first_name: formData.firstName,
                 parent: formData.parentId
             })
-        )
-        .then((res) => {
-            console.log(res)
         })
+        .then((res) => {
+            res.json().then((data) => {
+                toast.success(`${data.first_name}'s details have been successfully updated!`)
+                setTimeout(() => {
+                    navigate('/admin')
+                    window.location.reload()
+                }, 1000);
+            })
+        })
+        .catch((err) => console.log(err.message))
     }
     return ( 
         <>
+            <ToastContainer 
+                position = 'top-center'
+                autoClose = {2000}
+                hideProgressBar = {true}
+                closeOnClick = {true}
+                pauseOnHover = {true}
+                draggable = {true}
+                progress = {undefined}
+                theme= 'colored'
+            />
             <div>
                 <form onSubmit={handleEditMembers}>
                     <div>
                         <input 
                             value={formData.firstName}
-                            onChange={handleInputChange}
+                            onChange={(e) => setFormData({...formData, firstName: e.target.value})}
                             type='text' 
                             placeholder="Enter First Name..."
                             className="entry"
@@ -58,7 +74,7 @@ const EditMembers = ({ members }) => {
                     <div>
                         <input 
                             value={formData.parentId}
-                            onChange={handleInputChange}
+                            onChange={(e) => setFormData({...formData, parentId: e.target.value})}
                             type='number' 
                             placeholder="Enter Parent's Id..."
                             className="entry"

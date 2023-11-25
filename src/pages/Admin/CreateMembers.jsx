@@ -11,10 +11,11 @@ const CreateMembers = () => {
     const handleCreateMembers = (e) => {
         e.preventDefault()
 
-        if(firstName && parentId) {
+        // if(firstName && parentId) {
             fetch(`${dataUrl}/create-member/`, {
                 method: "POST",
                 headers: {
+                    'accept': 'application/json, text/plain, */*',
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({first_name: firstName, parent: parentId}),
@@ -36,7 +37,7 @@ const CreateMembers = () => {
             .catch((err) => {
                 toast.error(err.message)
             })
-        } 
+        // } 
 
         
     }

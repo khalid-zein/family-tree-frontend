@@ -12,7 +12,6 @@ import { dataUrl } from './data/ApiUrls'
 import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
-import { useContext } from 'react';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
@@ -42,9 +41,7 @@ function App() {
               setData={setData} 
             />} 
           />
-          <Route path='/admin/edit-member/:id' element={ 
-            <EditMembers members={members}/>} 
-          />
+          <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
          </Routes>
          <Footer />

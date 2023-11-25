@@ -11,7 +11,6 @@ const Admin = ({ members, loading, error, setData }) => {
     const handleDeleteMember = async (id) => {
         axios.delete(`${dataUrl}/update-delete/${id}`)
             .then((res) => {
-                console.log(res)
                 const newMembers = members.filter((member) => member.id !== id)
                 setData(newMembers)
                 window.location.reload()
@@ -52,7 +51,7 @@ const Admin = ({ members, loading, error, setData }) => {
                                 <td>{member.first_name}</td>
                                 <td>{member.last_name}</td>
                                 <td className="">
-                                    <Link to={`/admin/edit-member/${member.id}`}>
+                                    <Link to={`/admin/edit-member/${member.id}/`}>
                                         <button>
                                             <BsPencilSquare />
                                         </button>
