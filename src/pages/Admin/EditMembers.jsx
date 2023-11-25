@@ -5,10 +5,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 const EditMembers = () => {
     const { id } = useParams()
+    const navigate =useNavigate()
     const [formData, setFormData] = useState({
         id: id, firstName: "", parentId: ""
     })
-    const navigate =useNavigate()
 
     useEffect(() => {
         fetch(`${dataUrl}/update-delete/${id}`)

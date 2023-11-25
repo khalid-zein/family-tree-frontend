@@ -1,4 +1,3 @@
-// import { useEffect, useState } from "react";
 import { FadeLoader } from "react-spinners";
 import { BsPencilSquare } from "react-icons/bs"
 import { BiTrash } from "react-icons/bi"
@@ -33,7 +32,6 @@ const Admin = ({ members, loading, error, setData }) => {
             ) : (
                 <div style={{color: "white"}}>
                     <p>{error}</p>
-
                     <table class="table-auto">
                         <thead>
                             <tr>

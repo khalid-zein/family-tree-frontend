@@ -11,7 +11,7 @@ const CreateMembers = () => {
     const handleCreateMembers = (e) => {
         e.preventDefault()
 
-        // if(firstName && parentId) {
+        if(firstName && parentId) {
             fetch(`${dataUrl}/create-member/`, {
                 method: "POST",
                 headers: {
@@ -37,11 +37,9 @@ const CreateMembers = () => {
             .catch((err) => {
                 toast.error(err.message)
             })
-        // } 
+        } 
 
-        
     }
-
 
     return ( 
         <>
