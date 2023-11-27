@@ -7,33 +7,40 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Admin from './pages/Admin/Admin';
 import CreateMembers from './pages/Admin/CreateMembers';
-import { supabase } from './config/supabaseConfig';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { dataUrl } from './data/ApiUrls'
 import './App.css';
+import UseFetch from './components/UseFetch';
+import EditMembers from './pages/Admin/EditMembers';
 
 function App() {
-  const [session, setSession] = useState(null)
+  const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
+  const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
+  console.log("Logged in: ", loggedIn)
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
-  
   return (
     <div className="App">
       <BrowserRouter>
-         <Navbar session={session} />
+         <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
          <Routes>
           <Route path='/' element={ <Home />}/>
           <Route path='/aboutus' element={ <Aboutus />} />
           <Route path='/contact' element={ <Contact />}/>
-          <Route path='/login' element={ <Login />}/>
-          <Route path='/admin' element={ <Admin />} />
+          <Route path='/login' element={ 
+            <Login 
+              loggedIn={loggedIn} 
+              setLoggedIn={setLoggedIn} 
+            />
+          }/>
+          <Route path='/admin' element={ 
+            <Admin 
+              members={members} 
+              loading={loading} 
+              error={error} 
+              setData={setData} 
+            />} 
+          />
+          <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
          </Routes>
          <Footer />

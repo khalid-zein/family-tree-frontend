@@ -1,68 +1,71 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../config/supabaseConfig";
+import { FadeLoader } from "react-spinners";
+import { BsPencilSquare } from "react-icons/bs"
+import { BiTrash } from "react-icons/bi"
+import { dataUrl } from "../../data/ApiUrls";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Admin = () => {
-    const [familyMembers, setFamilyMembers] = useState([])
-    // const [search, setSearch] = useState('')
+const Admin = ({ members, loading, error, setData }) => {
 
-    useEffect(() => {
-      const getFamilyMembers = async () => {
-        const { data, error } = await supabase
-            .from('family_members')
-            .select()
-            .order('id', {descending: false})
+    const handleDeleteMember = async (id) => {
+        axios.delete(`${dataUrl}/update-delete/${id}`)
+            .then((res) => {
+                const newMembers = members.filter((member) => member.id !== id)
+                setData(newMembers)
+                window.location.reload()
+            })
+            .catch(err => console.error(err));
+    }
 
-        if (data) {
-            setFamilyMembers(data)
-            console.log(data)
-        }
-
-        if (error) {
-            console.log(error)
-        }
-      }
-
-      getFamilyMembers()
-    }, [])
-
-    // const handleSearch = (e) => {
-    //     setSearch(e.target.value)
-    // }
-
-    // const filteredMembers = familyMembers.filter((item) => item.id.includes(search.toLowerCase()))
-    
     return ( 
         <>
-            <div style={{color: "white"}}>
-                {/* <form onSubmit={handleSearch}>
-                    <input 
-                        value={search}
-                        onChange={handleSearch}
-                        type='search' 
-                        placeholder="Search family member..." 
+            {loading ? (
+                <div className="flex items-center justify-center p-8">
+                    <FadeLoader 
+                        color="#fff" 
+                        loading={loading}
+                        size={50}
+                        aria-label="Loading Content..."
+                        members-testid="loader"
                     />
-
-                </form> */}
-
-                <table class="table-auto">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Father's Name</th>
-                        <th>Children</th>
-                    </tr>
-                </thead>
-                {familyMembers.map((item) => (
-                    <tbody>
-                        <tr>
-                        <td>{item.id}</td>
-                        <td>{item.fathersName}</td>
-                        <td>{item.children}</td>
-                        </tr>
-                    </tbody>
-                ))}
-                </table>
-            </div>
+                </div>
+            ) : (
+                <div style={{color: "white"}}>
+                    <p>{error}</p>
+                    <table class="table-auto">
+                        <thead>
+                            <tr>
+                                <th>Parent's Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        {members.map((member, index) => (
+                            <tbody key={index}>
+                                <tr>
+                                <td>{member.parent}</td>
+                                <td>{member.first_name}</td>
+                                <td>{member.last_name}</td>
+                                <td className="">
+                                    <Link to={`/admin/edit-member/${member.id}/`}>
+                                        <button>
+                                            <BsPencilSquare />
+                                        </button>
+                                    </Link>
+                                </td>
+                                <td>
+                                    <button onClick={() => handleDeleteMember(member.id)}>
+                                        <BiTrash /> 
+                                    </button>
+                                </td>
+                                </tr>
+                            </tbody>
+                        ))}
+                    </table>
+                </div>
+            )}
         </>
      );
 }

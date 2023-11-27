@@ -1,43 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../config/supabaseConfig";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
+import { userUrl } from "../data/ApiUrls";
 
-function Login() {
-const navigate = useNavigate()
-
+const Login = ({loggedIn, setLoggedIn}) => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleLogin = async (e) => {
+  useEffect(() => {
+    if (loggedIn) {
+      navigate('/admin')
+    }
+  }, [])
+
+  const handleLogin = (e) => {
     e.preventDefault()
     
-    try {
-      if (email && password) {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: email,
-          password: password
-        })      
-        
-        if (data) {
-          setEmail('') 
-          setPassword('')
-          navigate('/admin')
-        } 
-        
-        if (error) {
-          console.log(error)
-        }
-        toast.success('User logged in successfully')
-      } else {
-        toast.error('Please fill in all fields')
-      }
-
-    } catch (err) {
-      console.log(err)
+    if (email && password) {
+      fetch(`${userUrl}/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({email, password}),
+      })
+      .then((res) => res.json())
+      .then((data) => {
+          localStorage.setItem('loggedIn', true)
+          localStorage.setItem('twt-token', data.token)
+          setEmail("")
+          setPassword("")
+          setLoggedIn(true)
+          setTimeout(() => {
+            toast.success('User logged in successfully!')
+          }, 1000);
+          setTimeout(() => {
+            navigate('/admin/create-members')
+          } , 2000);
+      })
+    } else {
+      toast.error('Please fill in all fields!')
     }
-   
   }
 
   return (
@@ -67,19 +72,21 @@ const navigate = useNavigate()
             <p>Sign in</p>
             <form onSubmit={handleLogin}>
               <div>
-                 <input
+                <input
+                  name="email"
+                  type="email" 
                   value={email} 
                   onChange={(e) => setEmail(e.target.value)}
                   className="entry" 
-                  type="email" 
-                  placeholder="Email"
+                  placeholder="Enter email ..."
                 />
-                 <input
+                <input
+                  name="password"
+                  type="password" 
                   value={password} 
                   onChange={(e) => setPassword(e.target.value)}
                   className="entry" 
-                  type="password" 
-                  placeholder="password"
+                  placeholder="Enter password ..."
                 />
               </div>
               <button>Submit</button><br></br>
