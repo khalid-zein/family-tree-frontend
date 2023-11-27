@@ -539,7 +539,8 @@ header .nav-close-btn {
 
   nav a:hover {
     color: green;
-  }.login{
+  }
+  .login{
     height: 100vh;
   }
   .login .login-container{

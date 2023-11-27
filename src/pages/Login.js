@@ -19,27 +19,31 @@ const Login = ({loggedIn, setLoggedIn}) => {
     e.preventDefault()
     
     if (email && password) {
-      fetch(`${userUrl}/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({email, password}),
-      })
-      .then((res) => res.json())
-      .then((data) => {
-          localStorage.setItem('loggedIn', true)
-          localStorage.setItem('twt-token', data.token)
-          setEmail("")
-          setPassword("")
-          setLoggedIn(true)
-          setTimeout(() => {
-            toast.success('User logged in successfully!')
-          }, 1000);
-          setTimeout(() => {
-            navigate('/admin/create-members')
-          } , 2000);
-      })
+      if (email === 'nodhiambo01@gmail.com' && password === '@nickoch96') {
+        fetch(`${userUrl}/login`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({email, password}),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            localStorage.setItem('loggedIn', true)
+            localStorage.setItem('twt-token', data.token)
+            setEmail("")
+            setPassword("")
+            setLoggedIn(true)
+            setTimeout(() => {
+              toast.success('User logged in successfully!')
+            }, 1000);
+            setTimeout(() => {
+              navigate('/admin/create-members')
+            } , 2000);
+        })
+      } else {
+      toast.error('The email & password entered is not correct. Please try again!')
+      }
     } else {
       toast.error('Please fill in all fields!')
     }

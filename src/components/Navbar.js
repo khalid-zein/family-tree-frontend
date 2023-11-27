@@ -25,7 +25,6 @@ function Navbar({ loggedIn, setLoggedIn}) {
       })
       .then((res) => res.json())
       .then(data => {
-        console.log(data)
         navigate('/')
       })
       .catch(error => console.error(error));
@@ -42,6 +41,9 @@ function Navbar({ loggedIn, setLoggedIn}) {
         <Link to="/aboutus">
           <a onClick={hideNavbar}>ABOUT</a>
         </Link>
+        <Link to="/contact">
+          <a onClick={hideNavbar}>CONTACT US</a>
+        </Link>
         {loggedIn ? (
           <>
             <Link to="/admin            ">
@@ -50,21 +52,19 @@ function Navbar({ loggedIn, setLoggedIn}) {
             <Link to="/admin/create-members">
               <a onClick={hideNavbar}>CREATE MEMBERS</a>
             </Link>
+            <Link onClick={handleLogOut} to="/">
+              <a className="login-btn">Log Out</a>
+            </Link>
           </>
         ) : (
           <></>
         )}
-        <Link to="/contact">
-          <a onClick={hideNavbar}>CONTACT US</a>
-        </Link>
         <button className="nav-btn nav-close-btn" onClick={showNavbar}>
           <FaTimes />
         </button>
       <div className="login-btn-box">
         {loggedIn ? (
-          <Link onClick={handleLogOut} to="/">
-            <a className="login-btn">Log Out</a>
-          </Link>
+          <></>
         ) : (
           <Link to="/login">
             <a onClick={hideNavbar} className="login-btn">Admin's Dashboard</a>

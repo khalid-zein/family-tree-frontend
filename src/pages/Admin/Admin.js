@@ -30,7 +30,7 @@ const Admin = ({ members, loading, error, setData }) => {
                     />
                 </div>
             ) : (
-                <div style={{color: "white"}}>
+                <div>
                     <p>{error}</p>
                     <table class="table-auto">
                         <thead>
