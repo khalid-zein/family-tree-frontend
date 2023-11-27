@@ -2,9 +2,9 @@ import logo from "../assets/img/logo.png";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { supabase } from "../config/supabaseConfig";
+import { userUrl } from "../data/ApiUrls";
 
-function Navbar({session}) {
+function Navbar({ loggedIn, setLoggedIn}) {
   const navRef = useRef();
   const navigate = useNavigate()
 
@@ -16,12 +16,21 @@ function Navbar({session}) {
     navRef.current.classList.remove("responsive_nav");
   };
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
+  const handleLogOut = () => {
+    localStorage.clear()
+    setLoggedIn(false)
 
-    console.log(error)
-    navigate('/')
-}
+      fetch(`${userUrl}/logout`, {
+        method: "DELETE"
+      })
+      .then((res) => res.json())
+      .then(data => {
+        console.log(data)
+        navigate('/')
+      })
+      .catch(error => console.error(error));
+    
+  }
 
   return (
     <header>
@@ -33,7 +42,7 @@ function Navbar({session}) {
         <Link to="/aboutus">
           <a onClick={hideNavbar}>ABOUT</a>
         </Link>
-        {session ? (
+        {loggedIn ? (
           <>
             <Link to="/admin            ">
               <a onClick={hideNavbar}>ADMIN</a>
@@ -52,13 +61,13 @@ function Navbar({session}) {
           <FaTimes />
         </button>
       <div className="login-btn-box">
-        {session ? (
-          <Link onClick={handleLogout} to="/">
-            <button className="login-btn">Log Out</button>
+        {loggedIn ? (
+          <Link onClick={handleLogOut} to="/">
+            <a className="login-btn">Log Out</a>
           </Link>
         ) : (
           <Link to="/login">
-            <button onClick={hideNavbar} className="login-btn">Admin's Dashboard</button>
+            <a onClick={hideNavbar} className="login-btn">Admin's Dashboard</a>
           </Link>
         )}
         
@@ -72,3 +81,4 @@ function Navbar({session}) {
 }
 
 export default Navbar;
+
