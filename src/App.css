@@ -33,11 +33,11 @@ header img {
 }
 header nav{
   display: flex;
-  width: 80%;
-  margin-left: 40%;
+  /* width: 80%; */
+  margin-left: 30%;
 }
 nav a {
-  margin: 0 1rem;
+  margin: 0.6rem;
   color: white;
   text-decoration: none;
 }
@@ -449,8 +449,9 @@ header .nav-close-btn {
   font-weight: 500;
 }
 
-/* lets make it responsive */
 
+
+/* lets make it responsive */
 @media only screen and (max-width: 1024px) {
   .home{
     display: block;
@@ -504,7 +505,7 @@ header .nav-close-btn {
 
   header img{
     margin: auto;
-    padding-left: 25px;
+    /* padding-left: 25px; */
   }
 
   header nav {
@@ -517,7 +518,7 @@ header .nav-close-btn {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1.2rem;
     background-color: rgb(143, 100, 44);
     transition: 1s;
     margin-left: 0;
@@ -582,6 +583,8 @@ header .nav-close-btn {
     width: 90%;
   }
 }
+
+
 
 @media (max-width: 600px) {
   .footer p {

@@ -42,7 +42,7 @@ function Navbar({ loggedIn, setLoggedIn}) {
           <a onClick={hideNavbar}>ABOUT</a>
         </Link>
         <Link to="/contact">
-          <a onClick={hideNavbar}>CONTACT US</a>
+          <a onClick={hideNavbar}>CONTACT</a>
         </Link>
         {loggedIn ? (
           <>
@@ -50,10 +50,13 @@ function Navbar({ loggedIn, setLoggedIn}) {
               <a onClick={hideNavbar}>ADMIN</a>
             </Link>
             <Link to="/admin/create-members">
-              <a onClick={hideNavbar}>CREATE MEMBERS</a>
+              <a onClick={hideNavbar}>CREATE</a>
+            </Link>
+            <Link to="/admin/certificate">
+              <a onClick={hideNavbar}>CERTIFICATE</a>
             </Link>
             <Link onClick={handleLogOut} to="/">
-              <a className="login-btn">Log Out</a>
+              <a className="login-btn">LOG OUT</a>
             </Link>
           </>
         ) : (
