@@ -12,7 +12,6 @@ import { dataUrl } from './data/ApiUrls'
 import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
-import Certificate from './pages/Admin/Certificate';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
@@ -43,7 +42,6 @@ function App() {
           />
           <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
-            <Route path='/admin/certificate' element={ <Certificate members={members} loading={loading} error={error}/> } />
          </Routes>
          <Footer />
       </BrowserRouter>
