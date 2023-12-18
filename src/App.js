@@ -12,11 +12,13 @@ import { dataUrl } from './data/ApiUrls'
 import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
+import PrintCertificate from './pages/Admin/PrintCertificate';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
   console.log("Logged in: ", loggedIn)
+  console.log(members)
 
   return (
     <div className="App">
@@ -42,6 +44,7 @@ function App() {
           />
           <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
+          <Route path='/admin-print-certificate' element={ <PrintCertificate members={members} /> } />
          </Routes>
          <Footer />
       </BrowserRouter>
