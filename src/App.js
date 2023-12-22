@@ -44,7 +44,13 @@ function App() {
           />
           <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
           <Route path='/admin/create-members' element={ <CreateMembers /> } />
-          <Route path='/admin-print-certificate' element={ <PrintCertificate members={members} /> } />
+          <Route path='/admin-print-certificate' element={ 
+            <PrintCertificate 
+              members={members} 
+              loading={loading} 
+              error={error} 
+            /> } 
+          />
          </Routes>
          <Footer />
       </BrowserRouter>
