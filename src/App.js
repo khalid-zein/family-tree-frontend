@@ -18,7 +18,7 @@ function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
   const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
   console.log("Logged in: ", loggedIn)
-  console.log(members)
+  console.log(members.map(item => item.id))
 
   return (
     <div className="App">

@@ -7,7 +7,7 @@ const EditMembers = () => {
     const { id } = useParams()
     const navigate =useNavigate()
     const [formData, setFormData] = useState({
-        id: id, firstName: "", parentId: ""
+        id: id, userName: "", parentId: ""
     })
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const EditMembers = () => {
             if(res.ok) {
                 res.json().then((data) => {
                     setFormData({...formData, 
-                        firstName: data.first_name, 
+                        userName: data.user_name, 
                         parentId: data.parent 
                     })
                 })
@@ -33,13 +33,13 @@ const EditMembers = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                first_name: formData.firstName,
+                user_name: formData.userName,
                 parent: formData.parentId
             })
         })
         .then((res) => {
             res.json().then((data) => {
-                toast.success(`${data.first_name}'s details have been successfully updated!`)
+                toast.success(`${data.user_name}'s details have been successfully updated!`)
                 setTimeout(() => {
                     navigate('/admin')
                     window.location.reload()
@@ -64,8 +64,8 @@ const EditMembers = () => {
                 <form onSubmit={handleEditMembers}>
                     <div>
                         <input 
-                            value={formData.firstName}
-                            onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                            value={formData.userName}
+                            onChange={(e) => setFormData({...formData, userName: e.target.value})}
                             type='text' 
                             placeholder="Enter First Name..."
                             className="entry"

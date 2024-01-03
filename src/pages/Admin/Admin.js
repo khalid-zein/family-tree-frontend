@@ -40,9 +40,9 @@ const Admin = ({ members, loading, error, setData }) => {
                     <table class="table-auto">
                         <thead>
                             <tr>
-                                <th>Parent's Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>ID</th>
+                                <th>Parent's Name</th>
+                                <th>Child's Name</th>
                                 <th>Update</th>
                                 <th>Delete</th>
                             </tr>
@@ -50,9 +50,17 @@ const Admin = ({ members, loading, error, setData }) => {
                         {members.map((member, index) => (
                             <tbody key={index}>
                                 <tr>
-                                    <td>{member.parent}</td>
-                                    <td>{member.first_name}</td>
-                                    <td>{member.last_name}</td>
+                                    <td>{member.id}</td>
+                                    <td>
+                                    {member.parent.length > 0 && (
+                                        <div>
+                                        {member.parent.map((parent, parentIndex) => (
+                                            <p key={parentIndex}>{parent.user_name}</p>
+                                        ))}
+                                        </div>
+                                    )}
+                                    </td>
+                                    <td>{member.user_name}</td>
                                     <td className="">
                                         <Link to={`/admin/edit-member/${member.id}/`}>
                                             <button>

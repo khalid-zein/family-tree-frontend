@@ -1,32 +1,32 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dataUrl } from "../../data/ApiUrls";
+// import { dataUrl } from "../../data/ApiUrls";
 import { ToastContainer, toast } from "react-toastify";
 
 const CreateMembers = () => {
-    const [firstName, setFirstName] = useState("")
+    const [userName, setuserName] = useState("")
     const [parentId, setParentId] = useState("")
     const navigate = useNavigate()
 
     const handleCreateMembers = (e) => {
         e.preventDefault()
 
-        if(firstName && parentId) {
-            fetch(`${dataUrl}/create-member/`, {
+        if(userName && parentId) {
+            fetch('https://albaalawiyeastafr.org/trees/api/create-member/', {
                 method: "POST",
                 headers: {
                     'accept': 'application/json, text/plain, */*',
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({first_name: firstName, parent: parentId}),
+                body: JSON.stringify({user_name: userName, parent: parentId}),
             })
             .then((res) => {
                 if(res.ok) {
                     res.json()
                     .then((data) => {
-                        setFirstName('')
+                        setuserName('')
                         setParentId('')
-                        toast.success(`You have successfully added ${data.first_name} to membership!`)
+                        toast.success(`You have successfully added ${data.user_name} to membership!`)
                         setTimeout(() => {
                             navigate('/admin')
                             window.location.reload()    
@@ -57,8 +57,8 @@ const CreateMembers = () => {
                 <form onSubmit={handleCreateMembers}>
                     <div>
                         <input 
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            value={userName}
+                            onChange={(e) => setuserName(e.target.value)}
                             type='text' 
                             placeholder="Enter First Name..."
                             className="entry"
