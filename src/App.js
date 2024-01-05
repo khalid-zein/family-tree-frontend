@@ -34,7 +34,7 @@ function App() {
               setLoggedIn={setLoggedIn} 
             />
           }/>
-          <Route path='/admin' element={ 
+          <Route path='/admin/members' element={ 
             <Admin 
               members={members} 
               loading={loading} 

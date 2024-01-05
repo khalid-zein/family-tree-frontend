@@ -46,7 +46,7 @@ function Navbar({ loggedIn, setLoggedIn}) {
         </Link>
         {loggedIn ? (
           <>
-            <Link to="/admin            ">
+            <Link to="/admin/members">
               <a onClick={hideNavbar}>ADMIN</a>
             </Link>
             <Link to="/admin/create-members">

@@ -41,7 +41,7 @@ const EditMembers = () => {
             res.json().then((data) => {
                 toast.success(`${data.user_name}'s details have been successfully updated!`)
                 setTimeout(() => {
-                    navigate('/admin')
+                    navigate('/admin/members')
                     window.location.reload()
                 }, 1000);
             })

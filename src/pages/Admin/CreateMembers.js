@@ -28,7 +28,7 @@ const CreateMembers = () => {
                         setParentId('')
                         toast.success(`You have successfully added ${data.user_name} to membership!`)
                         setTimeout(() => {
-                            navigate('/admin')
+                            navigate('/admin/members')
                             window.location.reload()    
                         }, 2000);
                     })
