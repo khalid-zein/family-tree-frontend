@@ -2,7 +2,6 @@ import logo from "../assets/img/logo.png";
 import { useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { userUrl } from "../data/ApiUrls";
 
 function Navbar({ loggedIn, setLoggedIn}) {
   const navRef = useRef();
@@ -16,20 +15,15 @@ function Navbar({ loggedIn, setLoggedIn}) {
     navRef.current.classList.remove("responsive_nav");
   };
 
-  const handleLogOut = () => {
-    localStorage.clear()
-    setLoggedIn(false)
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("twt-token");
+    setLoggedIn(false);
 
-      fetch(`${userUrl}/logout`, {
-        method: "DELETE"
-      })
-      .then((res) => res.json())
-      .then(data => {
-        navigate('/')
-      })
-      .catch(error => console.error(error));
-    
-  }
+    // Redirect to the login page or any other page after logout
+    navigate("/login");
+  };
+
 
   return (
     <header>
@@ -52,10 +46,10 @@ function Navbar({ loggedIn, setLoggedIn}) {
             <Link to="/admin/create-members">
               <a onClick={hideNavbar}>CREATE</a>
             </Link>
-            <Link to="/admin/certificate">
+            <Link to="/admin-print-certificate">
               <a onClick={hideNavbar}>CERTIFICATE</a>
             </Link>
-            <Link onClick={handleLogOut} to="/">
+            <Link onClick={handleLogout} to="/">
               <a className="login-btn">LOG OUT</a>
             </Link>
           </>

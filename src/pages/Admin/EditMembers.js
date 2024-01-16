@@ -7,17 +7,17 @@ const EditMembers = () => {
     const { id } = useParams()
     const navigate =useNavigate()
     const [formData, setFormData] = useState({
-        id: id, userName: "", parentId: ""
+        id: id, userName: ""
     })
 
     useEffect(() => {
-        fetch(`${dataUrl}/update-delete/${id}`)
+        fetch(`${dataUrl}/update-delete/${id}/`)
         .then((res) => {
             if(res.ok) {
                 res.json().then((data) => {
                     setFormData({...formData, 
                         userName: data.user_name, 
-                        parentId: data.parent 
+                        id: data.id 
                     })
                 })
             }
@@ -27,14 +27,14 @@ const EditMembers = () => {
     const handleEditMembers = (e) => {
         e.preventDefault()
 
-        fetch(`${dataUrl}/update-delete/${id}`, {
+        fetch(`${dataUrl}/update-delete/${id}/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 user_name: formData.userName,
-                parent: formData.parentId
+                parent: formData.id
             })
         })
         .then((res) => {
@@ -73,8 +73,8 @@ const EditMembers = () => {
                     </div>
                     <div>
                         <input 
-                            value={formData.parentId}
-                            onChange={(e) => setFormData({...formData, parentId: e.target.value})}
+                            value={formData.id}
+                            onChange={(e) => setFormData({...formData, id: e.target.value})}
                             type='number' 
                             placeholder="Enter Parent's Id..."
                             className="entry"

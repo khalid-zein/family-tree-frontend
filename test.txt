@@ -1,0 +1,78 @@
+# Create a member:
+ 	trees/api/create-member/
+
+# Retrieves a list of all members:
+        trees/api/view-list/
+    {
+      "id": 8,
+      "parent": 3,
+      "user_name": "Abby"
+    }
+
+# Retrieves all parents:
+        trees/api/view-parents/
+        [
+            {
+                "id": 1,
+                "user_name": "Abby"
+                parent: 2,
+                children: [
+                    {
+                        "id": 1,
+                        "parent": 3,
+                        "user_name": "Abby"
+                    },
+                    {
+                        "id": 2,
+                        "parent": 3,
+                        "user_name": "Abby"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "parent": 3,
+                "user_name": "Abby"
+            },
+            {
+                "id": 3,
+                "parent": 3,
+                "user_name": "Abby"
+            }
+        ]
+
+# Retrieves a member's parents:
+        trees/api/view-parents/<int:pk>/
+        [
+            {
+                "id": 1,
+                "user_name": "Abby"
+                parents: [
+                    {
+                        "id": 1,
+                        "parent": 3,
+                        "user_name": "Abby"
+                    },
+                    {
+                        "id": 2,
+                        "parent": 3,
+                        "user_name": "Abby"
+                    }
+                ]
+            },
+        ]
+
+# Retrieves a member's children:
+        trees/api/view-children/<int:pk>/
+
+# Retrieve, update, delete a single member:
+        trees/api/update-delete/<int:pk>/
+
+# Login:
+	users/api/login/
+
+# Token reset:
+        users/token/refresh/
+
+# Admin logout:
+        users/api/logout/

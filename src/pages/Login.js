@@ -5,47 +5,52 @@ import 'react-toastify/dist/ReactToastify.css';
 import { userUrl } from "../data/ApiUrls";
 
 const Login = ({loggedIn, setLoggedIn}) => {
-  const navigate = useNavigate()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (loggedIn) {
-      navigate('/admin')
+      navigate("/admin/create-members");
     }
-  }, [])
+  }, [loggedIn, navigate]);
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     if (email && password) {
-      if (email === 'nodhiambo01@gmail.com' && password === '@nickoch96') {
-        fetch(`${userUrl}/login`, {
+      try {
+        const response = await fetch(`${userUrl}/login/`, {
           method: "POST",
           headers: {
-              "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({email, password}),
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            localStorage.setItem('loggedIn', true)
-            localStorage.setItem('twt-token', data.token)
-            setEmail("")
-            setPassword("")
-            setLoggedIn(true)
-            setTimeout(() => {
-              toast.success('User logged in successfully!')
-            }, 1000);
-            setTimeout(() => {
-              navigate('/admin/create-members')
-            } , 2000);
-        })
-      } else {
-      toast.error('The email & password entered is not correct. Please try again!')
+          // credentials: "include",
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Login failed");
+        }
+
+        const data = await response.json();
+
+        localStorage.setItem("loggedIn", true);
+        localStorage.setItem("twt-token", data.token);
+        console.log(data.token)
+        setEmail("");
+        setPassword("");
+        setLoggedIn(true);
+
+        toast.success("User logged in successfully!");
+
+        navigate("/admin/create-members");
+
+      } catch (error) {
+        toast.error("Login failed. Please try again!");
       }
     } else {
-      toast.error('Please fill in all fields!')
+      toast.error("Please fill in all fields!");
     }
   }
 
@@ -66,7 +71,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
 
         <div className="login-one">
           <div>
-            <h3><i class="fa-solid fa-triangle-exclamation"></i></h3>
+            <h3><i className="fa-solid fa-triangle-exclamation"></i></h3>
             <p className="p-one">Limited access</p>
           </div>
         </div>

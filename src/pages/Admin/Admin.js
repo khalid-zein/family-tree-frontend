@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 const Admin = ({ members, loading, error, setData }) => {
-
+    console.log(members)
     const handleDeleteMember = async (id) => {
         axios.delete(`${dataUrl}/update-delete/${id}`)
             .then((res) => {
@@ -18,9 +18,6 @@ const Admin = ({ members, loading, error, setData }) => {
             })
             .catch(err => console.error(err));
     }
-
-
-  
 
     return ( 
         <>
@@ -52,13 +49,7 @@ const Admin = ({ members, loading, error, setData }) => {
                                 <tr>
                                     <td>{member.id}</td>
                                     <td>
-                                    {member.parent.length > 0 && (
-                                        <div>
-                                        {member.parent.map((parent, parentIndex) => (
-                                            <p key={parentIndex}>{parent.user_name}</p>
-                                        ))}
-                                        </div>
-                                    )}
+                                        {member.parentId}
                                     </td>
                                     <td>{member.user_name}</td>
                                     <td className="">
