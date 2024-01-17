@@ -77,73 +77,56 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
         {loading ? (
           <p>Loading member's list..</p>
         ): (
-          
-            <div>
-                    <p>{error}</p>
-                    <table class="table-auto">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Parent's Name</th>
-                                <th>Child's Name</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        {filteredMembers.map((member, index) => (
-                            <tbody key={index}>
-                                <tr>
-                                    <td>{member.id}</td>
-                                    <td>
-                                        {member.user_name}
-                                    </td>
-                                        <td>
-                                        {member.parent.length > 0 && (
-                                          <div>
-                                            {member.parent.map((parent, parentIndex) => (
-                                              <p key={parentIndex}>{parent.user_name}</p>
-                                            ))}
-                                          </div>
-                                        )}  
-                                        </td>
-                                    <td className="">
-                                        <Link to={`/admin/edit-member/${member.id}/`}>
-                                            <button>
-                                                <BsPencilSquare />
-                                            </button>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleDeleteMember(member.id)}>
-                                            <BiTrash /> 
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handlePrintDetails(member)}>
-                                            Print Certificate
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        ))}
-                    </table>
-                    
-                </div>
-            // <div
-            //   onClick={() => handlePrintDetails(member)}
-            //   key={member.id}
-            //   style={{ cursor: 'pointer' }}
-            // >
-            //   <p>{member.id}</p>
-            //   <p>{member.user_name}</p>
-            //   {member.parent.length > 0 && (
-            //     <div>
-            //       {member.parent.map((parent, parentIndex) => (
-            //         <p key={parentIndex}>{parent.user_name}</p>
-            //       ))}
-            //     </div>
-            //   )}
-            // </div>
+          <div>
+            <p>{error}</p>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Parent's Name</th>
+                        <th>Child's Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                {filteredMembers.map((member, index) => (
+                    <tbody key={index}>
+                        <tr>
+                            <td>{member.id}</td>
+                            <td>
+                                {member.user_name}
+                            </td>
+                                <td>
+                                {member.parent.length > 0 && (
+                                  <div>
+                                    {member.parent.map((parent, parentIndex) => (
+                                      <p key={parentIndex}>{parent.user_name}</p>
+                                    ))}
+                                  </div>
+                                )}  
+                                </td>
+                            <td className="">
+                                <Link to={`/admin/edit-member/${member.id}/`}>
+                                    <button>
+                                        <BsPencilSquare />
+                                    </button>
+                                </Link>
+                            </td>
+                            <td>
+                                <button onClick={() => handleDeleteMember(member.id)}>
+                                    <BiTrash /> 
+                                </button>
+                            </td>
+                            <td>
+                                <button onClick={() => handlePrintDetails(member)}>
+                                    Print Certificate
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                ))}
+            </table>
+          </div>
         )}
       </div>
     </>
