@@ -16,12 +16,10 @@ import EditMembers from './pages/Admin/EditMembers';
 import PrintCertificate from './pages/Admin/PrintCertificate';
 
 function App() {
-  const { data: allMembers, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
-  // const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
+  const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
-  const members = allMembers.members
-  console.log(members)
+  // const members = allMembers.members
 
   useEffect(() => {
     // Check if a valid token is present in local storage
@@ -55,8 +53,7 @@ function App() {
             <Admin 
               members={members} 
               loading={loading} 
-              error={error} 
-              setData={setData} 
+              error={error}  
             />} 
           />
           <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
@@ -65,7 +62,8 @@ function App() {
             <PrintCertificate 
               members={members} 
               loading={loading} 
-              error={error} 
+              error={error}
+              setData={setData} 
             /> } 
           />
          </Routes>

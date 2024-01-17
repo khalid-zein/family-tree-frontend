@@ -1,27 +1,16 @@
 import React from 'react';
 import { FadeLoader } from "react-spinners";
-import { BsPencilSquare } from "react-icons/bs"
-import { BiTrash } from "react-icons/bi"
 import { dataUrl } from "../../data/ApiUrls";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import UseFetch from '../../components/UseFetch';
 
-
-const Admin = ({ members, loading, error, setData }) => {
-    console.log(members)
-    const handleDeleteMember = async (id) => {
-        axios.delete(`${dataUrl}/update-delete/${id}`)
-            .then((res) => {
-                const newMembers = members.filter((member) => member.id !== id)
-                setData(newMembers)
-                window.location.reload()
-            })
-            .catch(err => console.error(err));
-    }
-
-    return ( 
-        <>
-            {loading ? (
+const Admin = ({  loading, error }) => {
+    const { data: members } = UseFetch(`${dataUrl}/view-parents/`)
+    
+    if(!members && loading) {
+        return (
+            <>
+                <p>Loading lineage data...</p>
                 <div className="flex items-center justify-center p-8">
                     <FadeLoader 
                         color="#fff" 
@@ -31,47 +20,49 @@ const Admin = ({ members, loading, error, setData }) => {
                         members-testid="loader"
                     />
                 </div>
-            ) : (
-                <div>
-                    <p>{error}</p>
-                    <table class="table-auto">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Parent's Name</th>
-                                <th>Child's Name</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        {members.map((member, index) => (
-                            <tbody key={index}>
-                                <tr>
-                                    <td>{member.id}</td>
-                                    <td>
-                                        {member.parentId}
-                                    </td>
-                                    <td>{member.user_name}</td>
-                                    <td className="">
-                                        <Link to={`/admin/edit-member/${member.id}/`}>
-                                            <button>
-                                                <BsPencilSquare />
-                                            </button>
-                                        </Link>
-                                    </td>
-                                    <td>
-                                        <button onClick={() => handleDeleteMember(member.id)}>
-                                            <BiTrash /> 
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        ))}
-                    </table>
-                    
-                </div>
-            )}
-        </>
+            </>
+        )
+    }
+    return (             
+        <div>
+            <p>{error}</p>
+            <h2>All Parents & Children</h2>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Parent's Name</th>
+                        <th>Child's Name</th>
+                    </tr>
+                </thead>
+                {members.map((member, index) => (
+                    <tbody key={index}>
+                        <tr>
+                            <td>{member.id}</td>
+                            <td>
+                                {member.user_name}
+                            </td>
+                            <td>
+                                {member?.children.length > 0 ? (
+                                    <div>
+                                        {member.children.map((child, index) => (
+                                            <span key={index}>{child.user_name}, </span>
+                                        ))}
+                                    </div>
+                                ): (
+                                    <p>No child input availabele</p>
+                                )}    
+                            </td>
+                        </tr>
+                    </tbody>
+                ))}
+            </table>
+            <>
+                <Link to='/admin-print-certificate'>
+                    Print Certificate
+                </Link>
+            </>
+        </div>
      );
 }
  

@@ -22,6 +22,7 @@ const EditMembers = () => {
                 })
             }
         })
+        .catch((err) => console.log(err.message))
     }, [])
 
     const handleEditMembers = (e) => {

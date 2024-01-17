@@ -10,9 +10,9 @@ const UseFetch = (apiUrl) => {
         fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
-            const allMembers = data.data
-            // console.log(data)
-            setData(allMembers)
+            // const allMembers = data.data
+            console.log(data)
+            setData(data)
             setLoading(false)
             setError(false)
         }) 

@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import { BsPencilSquare } from "react-icons/bs"
+import { BiTrash } from "react-icons/bi"
+import { dataUrl } from "../../data/ApiUrls";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import ReactDOMServer from 'react-dom/server';
 import certImage from '../../assets/img/baalawi-certificate.png';
 import "../../index.css"
 
-const PrintCertificate = ({ members, loading, error }) => {
+const PrintCertificate = ({ members, setData, loading, error }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [input, setInput] = useState('')
+
+  const handleDeleteMember = async (id) => {
+    axios.delete(`${dataUrl}/update-delete/${id}`)
+        .then((res) => {
+            const newMembers = members.filter((member) => member.id !== id)
+            setData(newMembers)
+            window.location.reload()
+        })
+        .catch(err => console.error(err));
+  }
 
   const handlePrintDetails = (member) => {
     setSelectedMember(member);
@@ -20,13 +35,13 @@ const PrintCertificate = ({ members, loading, error }) => {
         <div className="certificate-text">
           <h2>This Certificate is to certify that {selectedMember?.user_name}</h2>
           <h4>is a member of the Baalawi Family & is related to:</h4>
-          {selectedMember?.parent.length > 0 && (
-            <div>
-              {selectedMember.parent.map((parent, parentIndex) => (
-                  <p key={parentIndex}>{parent.id}: {parent.user_name}</p>
-              ))}
-            </div>
-          )}
+            {selectedMember?.parent.length > 0 && (
+              <div>
+                {selectedMember.parent.map((parent, parentIndex) => (
+                    <p key={parentIndex}>{parent.id}: {parent.user_name}</p>
+                ))}
+              </div>
+            )}
         </div>
       </div>
     );
@@ -62,23 +77,73 @@ const PrintCertificate = ({ members, loading, error }) => {
         {loading ? (
           <p>Loading member's list..</p>
         ): (
-          filteredMembers.map((member) => (
-            <div
-              onClick={() => handlePrintDetails(member)}
-              key={member.id}
-              style={{ cursor: 'pointer' }}
-            >
-              <p>{member.id}</p>
-              <p>{member.user_name}</p>
-              {member.parent.length > 0 && (
-                <div>
-                  {member.parent.map((parent, parentIndex) => (
-                    <p key={parentIndex}>{parent.user_name}</p>
-                  ))}
+          
+            <div>
+                    <p>{error}</p>
+                    <table class="table-auto">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Parent's Name</th>
+                                <th>Child's Name</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        {filteredMembers.map((member, index) => (
+                            <tbody key={index}>
+                                <tr>
+                                    <td>{member.id}</td>
+                                    <td>
+                                        {member.user_name}
+                                    </td>
+                                        <td>
+                                        {member.parent.length > 0 && (
+                                          <div>
+                                            {member.parent.map((parent, parentIndex) => (
+                                              <p key={parentIndex}>{parent.user_name}</p>
+                                            ))}
+                                          </div>
+                                        )}  
+                                        </td>
+                                    <td className="">
+                                        <Link to={`/admin/edit-member/${member.id}/`}>
+                                            <button>
+                                                <BsPencilSquare />
+                                            </button>
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleDeleteMember(member.id)}>
+                                            <BiTrash /> 
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handlePrintDetails(member)}>
+                                            Print Certificate
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        ))}
+                    </table>
+                    
                 </div>
-              )}
-            </div>
-          ))
+            // <div
+            //   onClick={() => handlePrintDetails(member)}
+            //   key={member.id}
+            //   style={{ cursor: 'pointer' }}
+            // >
+            //   <p>{member.id}</p>
+            //   <p>{member.user_name}</p>
+            //   {member.parent.length > 0 && (
+            //     <div>
+            //       {member.parent.map((parent, parentIndex) => (
+            //         <p key={parentIndex}>{parent.user_name}</p>
+            //       ))}
+            //     </div>
+            //   )}
+            // </div>
         )}
       </div>
     </>
