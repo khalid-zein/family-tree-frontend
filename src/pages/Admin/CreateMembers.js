@@ -23,7 +23,6 @@ const CreateMembers = ({addMember}) => {
                 if(res.ok) {
                     res.json()
                     .then((data) => {
-                        console.log(data);
                         addMember(data)
                         setuserName('')
                         setParentId('')
