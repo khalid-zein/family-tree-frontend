@@ -11,7 +11,7 @@ const UseFetch = (apiUrl) => {
         .then((res) => res.json())
         .then((data) => {
             // const allMembers = data.data
-            console.log(data)
+            // console.log(data)
             setData(data)
             setLoading(false)
             setError(false)
