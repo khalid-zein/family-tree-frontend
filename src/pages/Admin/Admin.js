@@ -4,7 +4,7 @@ import { dataUrl } from "../../data/ApiUrls";
 import { Link } from "react-router-dom";
 import UseFetch from '../../components/UseFetch';
 
-const Admin = ({  loading, error }) => {
+const Admin = ({ loading, error }) => {
     const { data: members } = UseFetch(`${dataUrl}/view-parents/`)
     
     if(!members && loading) {

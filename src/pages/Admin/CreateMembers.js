@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { dataUrl } from "../../data/ApiUrls";
 import { ToastContainer, toast } from "react-toastify";
+import { dataUrl } from "../../data/ApiUrls";
 
-const CreateMembers = () => {
+const CreateMembers = ({addMember}) => {
     const [userName, setuserName] = useState("")
     const [parentId, setParentId] = useState("")
     const navigate = useNavigate()
@@ -12,10 +12,9 @@ const CreateMembers = () => {
         e.preventDefault()
 
         if(userName && parentId) {
-            fetch('https://albaalawiyeastafr.org/trees/api/create-member/', {
+            fetch(`${dataUrl}/create-member/`, {
                 method: "POST",
                 headers: {
-                    'accept': 'application/json, text/plain, */*',
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({user_name: userName, parent: parentId}),
@@ -24,17 +23,18 @@ const CreateMembers = () => {
                 if(res.ok) {
                     res.json()
                     .then((data) => {
+                        console.log(data);
+                        addMember(data)
                         setuserName('')
                         setParentId('')
                         toast.success(`You have successfully added ${data.user_name} to membership!`)
-                        setTimeout(() => {
-                            navigate('/admin/members')
-                            window.location.reload()    
-                        }, 2000);
+                        
+                        navigate('/admin/members')   
                     })
                 }
             })
             .catch((err) => {
+                console.log(err)
                 toast.error('Please fill in all input fields!')
             })
         } 

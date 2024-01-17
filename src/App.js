@@ -19,7 +19,10 @@ function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
-  // const members = allMembers.members
+
+  const addMember  = (member) => {
+    setData([...members, member])
+  }
 
   useEffect(() => {
     // Check if a valid token is present in local storage
@@ -30,7 +33,7 @@ function App() {
     } else {
       navigate("/login");
     }
-  }, [navigate]);
+  }, []);
 
   console.log("Logged in: ", loggedIn)
 
@@ -53,11 +56,15 @@ function App() {
             <Admin 
               members={members} 
               loading={loading} 
-              error={error}  
+              error={error} 
             />} 
           />
           <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
-          <Route path='/admin/create-members' element={ <CreateMembers /> } />
+          <Route path='/admin/create-members' element={ 
+            <CreateMembers 
+              addMember={addMember}  
+            /> } 
+          />
           <Route path='/admin-print-certificate' element={ 
             <PrintCertificate 
               members={members} 
