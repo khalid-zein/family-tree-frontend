@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { BiTrash } from 'react-icons/bi';
 import { dataUrl } from '../../data/ApiUrls';
@@ -11,19 +11,32 @@ import '../../index.css';
 import customPdfTemplate from '../../assets/cert.pdf';
 import CreateMembers from '../../components/CreateMembers';
 
-const PrintCertificate = ({ members, setData, loading, error }) => {
+const PrintCertificate = () => {
   const [selectedMember, setSelectedMember] = useState(null);
-  const [input, setInput] = useState('');
+  const [memberId, setMemberId] = useState('');
+  const [members, setMembers] = useState(null)
 
-  const handleDeleteMember = async (id) => {
+   
+ 
+
+  const handleSearch = async(e) => {
+    e.preventDefault();
+
     try {
-      await axios.delete(`${dataUrl}/update-delete/${id}`);
-      const newMembers = members.filter((member) => member.id !== id);
-      setData(newMembers);
-    } catch (err) {
-      console.error(err);
+      const response = await axios.get(`${dataUrl}/search_family_member/?member_id=${memberId}`)
+      console.log(response.data)
+      if (memberId) {
+        setMembers(response.data)
+      } else {
+        console.log('no search item present')
+      }
+    } catch (error) {
+      console.error(error)
     }
-  };
+    
+  }
+
+
 
   const handlePrintDetails = (member) => {
     setSelectedMember(member);
@@ -37,10 +50,8 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
     const page = pdfDoc.getPage(0);
 
     // Add user details to the PDF
-    // const font = await pdfDoc.embedFont(PDFDocument.Font.Helvetica)
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);  
     const helveticaFontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);  
-
 
     page.drawText(`This Certificate is to certify that ${selectedMember?.user_name}`, {
       x: 100,
@@ -69,76 +80,42 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
     printWindow.location.href = printUrl;
   };
 
-  const filteredMembers = members.filter((member) =>
-    member.user_name.toLowerCase().includes(input.toLowerCase())
-  );
+  // const filteredMembers = members.filter((member) =>
+  //   member.user_name.toLowerCase().includes(input.toLowerCase())
+  // );
 
   return (
     <>
       <CreateMembers />
-      <form>
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Search member.." 
-        />
-      </form>
+      <div className='md:my-32 sm:my-16 my-8'>
+        <form onSubmit={handleSearch} >
+          <label  className='md:px-24 px-8 font-semibold text-gray-800' htmlFor="">Search Member by ID</label>
+          <input
+            value={memberId}
+            type='number'
+            className='entry'
+            onChange={(e) => setMemberId(e.target.value)}
+            placeholder="Search  by id..." 
+          />
+        </form>
 
-      <div>
-        <p>{error}</p>
-        {loading ? (
-          <p>Loading member's list..</p>
-        ) : (
+        <div className='md:px-16 p-8'>
           <div>
-            <p>{error}</p>
-            <table className="table-auto">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Parent's Name</th>
-                  <th>Child's Name</th>
-                  <th>Update</th>
-                  <th>Delete</th>
-                  <th>Print Certificate</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredMembers.map((member, index) => (
-                  <tr key={index}>
-                    <td>{member.id}</td>
-                    <td>{member.user_name}</td>
-                    <td>
-                      {member.parent.length > 0 && (
-                        <div>
-                          {member.parent.map((parent, parentIndex) => (
-                            <p key={parentIndex}>{parent.user_name}</p>
-                          ))}
-                        </div>
-                      )}
-                    </td>
-                    <td className="">
-                      <Link to={`/admin-edit/${member.id}/`}>
-                        <button>
-                          <BsPencilSquare />
-                        </button>
-                      </Link>
-                    </td>
-                    <td>
-                      <button onClick={() => handleDeleteMember(member.id)}>
-                        <BiTrash /> 
-                      </button>
-                    </td>
-                    <td>
-                      <button onClick={() => handlePrintDetails(member)}>
-                        Print Certificate
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            {members && members.map((member, index) => (
+              <div key={index} className='bg-gray-100 w-64 p-4 rounded-md my-4'>
+                <p>{member.user_name}</p>
+                <div>
+                  <button 
+                    onClick={() => handlePrintDetails(member)}
+                    className="px-3 py-2 bg-orange-500 "
+                  >
+                    Print Certificate
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     </>
   );

@@ -27,7 +27,7 @@ const CreateMembers = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({user_name: userName, parents: parents}),
-        });
+        }); 
         console.log(response)
 
         if (response.ok) {
@@ -69,6 +69,7 @@ const CreateMembers = () => {
               type="text"
               placeholder="Enter username..."
               className="entry"
+              required
             />
           </div>
           <div>
@@ -79,9 +80,10 @@ const CreateMembers = () => {
               type="text"
               placeholder="Enter relatives..."
               className="entry"
+              required
             />
           </div>
-          <button type="submit">
+          <button type="submit" className="px-3 py-2 bg-orange-500 ml-8">
             Submit
           </button>
           <br />

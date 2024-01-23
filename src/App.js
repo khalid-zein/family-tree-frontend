@@ -45,12 +45,7 @@ function App() {
             />
           }/>
           <Route path='/admin' element={ 
-            <PrintCertificate 
-              members={members} 
-              loading={loading} 
-              error={error}
-              setData={setData} 
-            /> } 
+            <PrintCertificate /> } 
           />
           <Route path='/admin-edit/:id' element={ <EditMembers />} />
          </Routes>
