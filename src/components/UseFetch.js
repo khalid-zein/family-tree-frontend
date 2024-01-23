@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 const UseFetch = (apiUrl) => {
@@ -10,8 +9,6 @@ const UseFetch = (apiUrl) => {
         fetch(apiUrl)
         .then((res) => res.json())
         .then((data) => {
-            // const allMembers = data.data
-            // console.log(data)
             setData(data)
             setLoading(false)
             setError(false)

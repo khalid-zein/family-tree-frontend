@@ -19,7 +19,6 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
       await axios.delete(`${dataUrl}/update-delete/${id}`);
       const newMembers = members.filter((member) => member.id !== id);
       setData(newMembers);
-      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -39,21 +38,21 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
     // Add user details to the PDF
     // const font = await pdfDoc.embedFont(PDFDocument.Font.Helvetica)
     const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);  
-    // const font = await pdfDoc.embedFont(StandardFonts.TimesRoman)
+    const helveticaFontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);  
+
 
     page.drawText(`This Certificate is to certify that ${selectedMember?.user_name}`, {
       x: 100,
       y: 550,
-      font: helveticaFont,
-      fontWeight: 800,
-      size: 12,
+      font: helveticaFontBold,
+      size: 18,
     });
 
-    page.drawText('is a member of the Baalawi Family & the foloowing are the grandparents:', {
+    page.drawText('is a member of the Baalawi Family & is related to:', {
       x: 100,
       y: 530,
       font: helveticaFont,
-      size: 12,
+      size: 14,
     });
 
     if (selectedMember?.parent.length > 0) {
@@ -116,7 +115,7 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
                       )}
                     </td>
                     <td className="">
-                      <Link to={`/admin/edit-member/${member.id}/`}>
+                      <Link to={`/admin-edit/${member.id}/`}>
                         <button>
                           <BsPencilSquare />
                         </button>

@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Admin from './pages/Admin/Admin';
-import CreateMembers from './pages/Admin/CreateMembers';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dataUrl } from './data/ApiUrls'
@@ -14,15 +13,12 @@ import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
 import PrintCertificate from './pages/Admin/PrintCertificate';
+import CreateMembers from './pages/Admin/CreateMembers';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
   const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate()
-
-  const addMember  = (member) => {
-    setData([...members, member])
-  }
 
   useEffect(() => {
     // Check if a valid token is present in local storage
@@ -50,21 +46,20 @@ function App() {
               setLoggedIn={setLoggedIn} 
             />
           }/>
-
-          {/* set user loggedin */}
-          <Route path='/admin/members' element={ 
+          <Route path='/admin-members' element={ 
             <Admin 
-              members={members} 
               loading={loading} 
+              members={members}
               error={error} 
             />} 
           />
-          <Route path='/admin/edit-member/:id' element={ <EditMembers />} />
-          <Route path='/admin/create-members' element={ 
+          <Route path='/admin-create' element={ 
             <CreateMembers 
-              addMember={addMember}  
-            /> } 
+              setData={setData}
+              members={members}
+            />} 
           />
+          <Route path='/admin-edit/:id' element={ <EditMembers />} />
           <Route path='/admin-print-certificate' element={ 
             <PrintCertificate 
               members={members} 

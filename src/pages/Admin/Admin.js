@@ -1,12 +1,8 @@
 import React from 'react';
 import { FadeLoader } from "react-spinners";
-import { dataUrl } from "../../data/ApiUrls";
 import { Link } from "react-router-dom";
-import UseFetch from '../../components/UseFetch';
 
-const Admin = ({ loading, error }) => {
-    const { data: members } = UseFetch(`${dataUrl}/view-parents/`)
-    
+const Admin = ({ members, loading, error }) => {
     if(!members && loading) {
         return (
             <>
@@ -43,14 +39,14 @@ const Admin = ({ loading, error }) => {
                                 {member.user_name}
                             </td>
                             <td>
-                                {member?.children.length > 0 ? (
+                                {member?.parent.length > 0 ? (
                                     <div>
-                                        {member.children.map((child, index) => (
-                                            <span key={index}>{child.user_name}, </span>
+                                        {member.parent.map((user, index) => (
+                                            <span key={index}>{user.user_name}, </span>
                                         ))}
                                     </div>
                                 ): (
-                                    <p>No child input availabele</p>
+                                    <p>No parent input availabele</p>
                                 )}    
                             </td>
                         </tr>

@@ -1,85 +1,92 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { dataUrl } from "../../data/ApiUrls";
 
-const CreateMembers = ({addMember}) => {
-    const [userName, setuserName] = useState("")
-    const [parentId, setParentId] = useState("")
-    const navigate = useNavigate()
+const CreateMembers = ({ setData, members }) => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    parents: "",
+  });
 
-    const handleCreateMembers = (e) => {
-        e.preventDefault()
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-        if(userName && parentId) {
-            fetch(`${dataUrl}/create-member/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({user_name: userName, parent: parentId}),
-            })
-            .then((res) => {
-                if(res.ok) {
-                    res.json()
-                    .then((data) => {
-                        addMember(data)
-                        setuserName('')
-                        setParentId('')
-                        toast.success(`You have successfully added ${data.user_name} to membership!`)
-                        
-                        navigate('/admin/members')   
-                    })
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-                toast.error('Please fill in all input fields!')
-            })
-        } 
+  const handleCreateMembers = async (e) => {
+    e.preventDefault();
 
+    const { userName, parents } = formData;
+
+    try {
+      if (formData) {   
+        const response = await fetch(`${dataUrl}/create_family_member/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({user_name: userName, parents: parents}),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setData([...members, formData]);
+          setFormData({ userName: "", parents: "" });
+          toast.success(`Successfully added ${data.user_name} to membership!`);         
+        } else {
+          throw new Error("Server returned an error");
+        }
+      } else {
+        toast.error("Please fill in all input fields!");
+      }
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    return ( 
-        <>
-            <ToastContainer 
-                position = 'top-center'
-                autoClose = {2000}
-                hideProgressBar = {true}
-                closeOnClick = {true}
-                pauseOnHover = {true}
-                draggable = {true}
-                progress = {undefined}
-                theme= 'colored'
+  return (
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={true}
+        closeOnClick={true}
+        pauseOnHover={true}
+        draggable={true}
+        progress={undefined}
+        theme="colored"
+      />
+      <div>
+        <form onSubmit={handleCreateMembers}>
+          <div>
+            <input
+              name="userName"
+              value={formData.userName}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Enter username..."
+              className="entry"
             />
-            <div>
-                <form onSubmit={handleCreateMembers}>
-                    <div>
-                        <input 
-                            value={userName}
-                            onChange={(e) => setuserName(e.target.value)}
-                            type='text' 
-                            placeholder="Enter First Name..."
-                            className="entry"
-                        />
-                    </div>
-                    <div>
-                        <input 
-                            value={parentId}
-                            onChange={(e) => setParentId(e.target.value)}
-                            type='number' 
-                            placeholder="Enter Parent's Id..."
-                            className="entry"
-                        />
-                    </div>
-                    <button>
-                        Submit
-                    </button>
-                    <br></br>
-                </form>
-            </div>
-        </>
-     );
-}
- 
+          </div>
+          <div>
+            <input
+              name="parents"
+              value={formData.parents}
+              onChange={handleInputChange}
+              type="text"
+              placeholder="Enter relatives..."
+              className="entry"
+            />
+          </div>
+          <button type="submit">
+            Submit
+          </button>
+          <br />
+        </form>
+      </div>
+    </>
+  );
+};
+
 export default CreateMembers;
