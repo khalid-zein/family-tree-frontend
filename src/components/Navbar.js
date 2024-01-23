@@ -40,14 +40,8 @@ function Navbar({ loggedIn, setLoggedIn}) {
         </Link>
         {loggedIn ? (
           <>
-            <Link to="/admin-members">
+            <Link to="/admin">
               <a onClick={hideNavbar}>ADMIN</a>
-            </Link>
-            <Link to="/admin-create">
-              <a onClick={hideNavbar}>CREATE</a>
-            </Link>
-            <Link to="/admin-print-certificate">
-              <a onClick={hideNavbar}>CERTIFICATE</a>
             </Link>
             <Link onClick={handleLogout} to="/">
               <a className="login-btn">LOG OUT</a>

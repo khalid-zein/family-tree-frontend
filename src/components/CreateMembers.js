@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { dataUrl } from "../../data/ApiUrls";
+import { dataUrl } from "../data/ApiUrls";
 
-const CreateMembers = ({ setData, members }) => {
+const CreateMembers = () => {
   const [formData, setFormData] = useState({
     userName: "",
     parents: "",
@@ -28,12 +28,14 @@ const CreateMembers = ({ setData, members }) => {
           },
           body: JSON.stringify({user_name: userName, parents: parents}),
         });
+        console.log(response)
 
         if (response.ok) {
           const data = await response.json();
-          setData([...members, formData]);
+          // setData([...members, formData]);
           setFormData({ userName: "", parents: "" });
           toast.success(`Successfully added ${data.user_name} to membership!`);         
+          window.location.reload()
         } else {
           throw new Error("Server returned an error");
         }

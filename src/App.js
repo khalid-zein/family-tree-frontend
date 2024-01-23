@@ -5,7 +5,6 @@ import Aboutus from './pages/Aboutus';
 import Navbar from './components/Navbar';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
-import Admin from './pages/Admin/Admin';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { dataUrl } from './data/ApiUrls'
@@ -13,7 +12,6 @@ import './App.css';
 import UseFetch from './components/UseFetch';
 import EditMembers from './pages/Admin/EditMembers';
 import PrintCertificate from './pages/Admin/PrintCertificate';
-import CreateMembers from './pages/Admin/CreateMembers';
 
 function App() {
   const { data: members, loading, error, setData } = UseFetch(`${dataUrl}/view-list`)
@@ -46,21 +44,7 @@ function App() {
               setLoggedIn={setLoggedIn} 
             />
           }/>
-          <Route path='/admin-members' element={ 
-            <Admin 
-              loading={loading} 
-              members={members}
-              error={error} 
-            />} 
-          />
-          <Route path='/admin-create' element={ 
-            <CreateMembers 
-              setData={setData}
-              members={members}
-            />} 
-          />
-          <Route path='/admin-edit/:id' element={ <EditMembers />} />
-          <Route path='/admin-print-certificate' element={ 
+          <Route path='/admin' element={ 
             <PrintCertificate 
               members={members} 
               loading={loading} 
@@ -68,6 +52,7 @@ function App() {
               setData={setData} 
             /> } 
           />
+          <Route path='/admin-edit/:id' element={ <EditMembers />} />
          </Routes>
          <Footer />
     </div>

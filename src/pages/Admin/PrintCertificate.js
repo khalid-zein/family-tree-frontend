@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import '../../index.css';
 
 import customPdfTemplate from '../../assets/cert.pdf';
+import CreateMembers from '../../components/CreateMembers';
 
 const PrintCertificate = ({ members, setData, loading, error }) => {
   const [selectedMember, setSelectedMember] = useState(null);
@@ -74,6 +75,7 @@ const PrintCertificate = ({ members, setData, loading, error }) => {
 
   return (
     <>
+      <CreateMembers />
       <form>
         <input
           value={input}
