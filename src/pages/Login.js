@@ -44,7 +44,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
 
         toast.success("User logged in successfully!");
 
-        navigate("/admin-create");
+        navigate("/admin");
 
       } catch (error) {
         toast.error("Login failed. Please try again!");
